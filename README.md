@@ -12,14 +12,14 @@ This project uses the Adult Income dataset to explore general patterns in income
 
 ## Project overview
 
-This project explores the U.S. college majors dataset (`data/adult.csv`) to understand how fields of study influence employment rates, salaries, and demographic outcomes. The analysis is designed to surface broad labor-market patterns (e.g., which majors have the lowest unemployment or the highest earnings) so that educators and students can get a 10,000-foot view of the trade-offs among different disciplines.
+This project examines the Adult Income dataset to understand how demographic and socioeconomic factors influence whether an individual earns more or less than $50,000 per year. By analyzing variables such as age, education level, occupation, marital status, work hours, and race, the project uncovers broad patterns in income distribution and highlights which characteristics are most strongly associated with higher earnings. The goal is to provide a clear, high-level perspective on income inequality across different demographic groups while building a reproducible and transparent foundation for further data exploration and modeling.
 
 ## How to run the analysis
-1. Clone the repository and move into it: `git clone <repo-url> && cd CollegeMajorAnalysis`.
+1. Clone the repository and move into it: `git clone <repo-url> && cd AdultIncomePrediction`.
 2. Build the Conda environment defined in `environment.yml`: `conda env create -f environment.yml`.
-3. Activate the environment: `conda activate college-major-analysis`.
+3. Activate the environment: `conda activate adult-income-prediction`.
 4. Launch Jupyter Lab from the project root: `jupyter lab`.
-5. Open or create your analysis notebook (e.g., `reports/college_major_analysis.ipynb`), point it to `data/recent-grads.csv`, and execute the cells to reproduce the charts and summary metrics.
+5. Open or create your analysis notebook (e.g., `reports/income-prediction.ipynb`), point it to `data/adult.csv`, and execute the cells to reproduce the charts and summary metrics.
 
 ## Dependencies
 - Python 3.12+
