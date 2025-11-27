@@ -19,7 +19,8 @@ cl: ## create conda lock for multiple platforms
 		-p linux-64 \
 		-p osx-64 \
 		-p osx-arm64 \
-		-p win-64 
+		-p win-64 \
+		-p linux-aarch64
 
 .PHONY: env
 env: ## remove previous and create environment from lock file
@@ -29,7 +30,7 @@ env: ## remove previous and create environment from lock file
 
 .PHONY: build
 build: ## build the docker image from the Dockerfile
-	docker build -t dockerlock --file Dockerfile .
+	docker build -t 522-milestone --file Dockerfile .
 
 .PHONY: run
 run: ## alias for the up target

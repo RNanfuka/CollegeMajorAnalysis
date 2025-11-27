@@ -1,6 +1,5 @@
 name: 522-milestone
 channels:
-  - defaults
   - conda-forge
 dependencies:
   - ucimlrepo
@@ -10,4 +9,7 @@ dependencies:
   - pandas
   - ipykernel
   - matplotlib
-  - altair-all=5.5.0
+  - pip
+  - pip:
+    - vegafusion
+    - altair
