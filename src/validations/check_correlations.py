@@ -113,7 +113,6 @@ correlation_schema = pa.DataFrameSchema(
 )
 
 
-def validate_correlation_schema(file_path) -> None:
-    df = pd.read_csv(file_path)
+def validate_correlation_schema(df) -> None:
     correlation_schema.validate(df, lazy=True)
     print("Correlation checks passed.")
