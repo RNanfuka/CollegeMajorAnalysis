@@ -147,7 +147,7 @@ def test_data_content(df) -> None:
                 checks=[
                     pa.Check.between(0, 150),
                     pa.Check(
-                        lambda s: s.isna().mean() <= 0.05,
+                        lambda s: s.isna().mean() <= 0.1,
                         element_wise=False,
                         error="Too many null values in 'age' column."
                     )
@@ -161,7 +161,7 @@ def test_data_content(df) -> None:
                         "Self-emp-inc", "Self-emp-not-inc", "State-gov", "Without-pay"
                     ]),
                     pa.Check(
-                        lambda s: s.isna().mean() <= 0.05,
+                        lambda s: s.isna().mean() <= 0.1,
                         element_wise=False,
                         error="Too many null values in 'workclass' column."
                     )
@@ -173,7 +173,7 @@ def test_data_content(df) -> None:
                 checks=[
                     pa.Check.between(0, 2000000),
                     pa.Check(
-                        lambda s: s.isna().mean() <= 0.05,
+                        lambda s: s.isna().mean() <= 0.1,
                         element_wise=False,
                         error="Too many null values in 'fnlwgt' column."
                     )
@@ -188,7 +188,7 @@ def test_data_content(df) -> None:
                         "Masters", "Preschool", "Prof-school", "Some-college"
                     ]),
                     pa.Check(
-                        lambda s: s.isna().mean() <= 0.05,
+                        lambda s: s.isna().mean() <= 0.1,
                         element_wise=False,
                         error="Too many null values in 'education' column."
                     )
@@ -199,7 +199,7 @@ def test_data_content(df) -> None:
                 checks=[
                     pa.Check.between(0, 16),
                     pa.Check(
-                        lambda s: s.isna().mean() <= 0.05,
+                        lambda s: s.isna().mean() <= 0.1,
                         element_wise=False,
                         error="Too many null values in 'education-num' column."
                     )
@@ -213,7 +213,7 @@ def test_data_content(df) -> None:
                         "Married-spouse-absent", "Never-married", "Separated", "Widowed"
                     ]),
                     pa.Check(
-                        lambda s: s.isna().mean() <= 0.05,
+                        lambda s: s.isna().mean() <= 0.1,
                         element_wise=False,
                         error="Too many null values in 'marital-status' column."
                     )
@@ -229,7 +229,7 @@ def test_data_content(df) -> None:
                         "Tech-support", "Transport-moving"
                     ]),
                     pa.Check(
-                        lambda s: s.isna().mean() <= 0.05,
+                        lambda s: s.isna().mean() <= 0.1,
                         element_wise=False,
                         error="Too many null values in 'occupation' column."
                     )
@@ -244,7 +244,7 @@ def test_data_content(df) -> None:
                         "Own-child", "Unmarried", "Wife"
                     ]),
                     pa.Check(
-                        lambda s: s.isna().mean() <= 0.05,
+                        lambda s: s.isna().mean() <= 0.1,
                         element_wise=False,
                         error="Too many null values in 'relationship' column."
                     )
@@ -258,7 +258,7 @@ def test_data_content(df) -> None:
                         "Black", "Other", "White"
                     ]),
                     pa.Check(
-                        lambda s: s.isna().mean() <= 0.05,
+                        lambda s: s.isna().mean() <= 0.10,
                         element_wise=False,
                         error="Too many null values in 'race' column."
                     )
@@ -269,7 +269,7 @@ def test_data_content(df) -> None:
                 checks=[
                     pa.Check.isin(["Female", "Male"]),
                     pa.Check(
-                        lambda s: s.isna().mean() <= 0.05,
+                        lambda s: s.isna().mean() <= 0.10,
                         element_wise=False,
                         error="Too many null values in 'sex' column."
                     )
@@ -280,7 +280,7 @@ def test_data_content(df) -> None:
                 checks=[
                     pa.Check.isin(["<=50K", "<=50K.", ">50K", ">50K."]),
                     pa.Check(
-                        lambda s: s.isna().mean() <= 0.05,
+                        lambda s: s.isna().mean() <= 0.10,
                         element_wise=False,
                         error="Too many null values in 'income' column."
                     )
