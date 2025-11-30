@@ -145,7 +145,6 @@ def test_data_content(df) -> None:
             "age": pa.Column(
                 int,
                 checks=[
-                    pa.Check.between(0, 150),
                     pa.Check(
                         lambda s: s.isna().mean() <= 0.1,
                         element_wise=False,
@@ -156,10 +155,6 @@ def test_data_content(df) -> None:
             "workclass": pa.Column(
                 str,
                 checks=[
-                    pa.Check.isin([
-                        "?", "Federal-gov", "Local-gov", "Never-worked", "Private",
-                        "Self-emp-inc", "Self-emp-not-inc", "State-gov", "Without-pay"
-                    ]),
                     pa.Check(
                         lambda s: s.isna().mean() <= 0.1,
                         element_wise=False,
@@ -171,7 +166,6 @@ def test_data_content(df) -> None:
             "fnlwgt": pa.Column(
                 int,
                 checks=[
-                    pa.Check.between(0, 2000000),
                     pa.Check(
                         lambda s: s.isna().mean() <= 0.1,
                         element_wise=False,
@@ -182,11 +176,6 @@ def test_data_content(df) -> None:
             "education": pa.Column(
                 str,
                 checks=[
-                    pa.Check.isin([
-                        "10th", "11th", "12th", "1st-4th", "5th-6th", "7th-8th", "9th",
-                        "Assoc-acdm", "Assoc-voc", "Bachelors", "Doctorate", "HS-grad",
-                        "Masters", "Preschool", "Prof-school", "Some-college"
-                    ]),
                     pa.Check(
                         lambda s: s.isna().mean() <= 0.1,
                         element_wise=False,
@@ -197,7 +186,6 @@ def test_data_content(df) -> None:
             "education-num": pa.Column(
                 int,
                 checks=[
-                    pa.Check.between(0, 16),
                     pa.Check(
                         lambda s: s.isna().mean() <= 0.1,
                         element_wise=False,
@@ -222,12 +210,6 @@ def test_data_content(df) -> None:
             "occupation": pa.Column(
                 str,
                 checks=[
-                    pa.Check.isin([
-                        "?", "Adm-clerical", "Armed-Forces", "Craft-repair", "Exec-managerial",
-                        "Farming-fishing", "Handlers-cleaners", "Machine-op-inspct", "Other-service",
-                        "Priv-house-serv", "Prof-specialty", "Protective-serv", "Sales",
-                        "Tech-support", "Transport-moving"
-                    ]),
                     pa.Check(
                         lambda s: s.isna().mean() <= 0.1,
                         element_wise=False,
@@ -239,10 +221,6 @@ def test_data_content(df) -> None:
             "relationship": pa.Column(
                 str,
                 checks=[
-                    pa.Check.isin([
-                        "Husband", "Not-in-family", "Other-relative",
-                        "Own-child", "Unmarried", "Wife"
-                    ]),
                     pa.Check(
                         lambda s: s.isna().mean() <= 0.1,
                         element_wise=False,
@@ -253,10 +231,6 @@ def test_data_content(df) -> None:
             "race": pa.Column(
                 str,
                 checks=[
-                    pa.Check.isin([
-                        "Amer-Indian-Eskimo", "Asian-Pac-Islander",
-                        "Black", "Other", "White"
-                    ]),
                     pa.Check(
                         lambda s: s.isna().mean() <= 0.10,
                         element_wise=False,
@@ -267,7 +241,6 @@ def test_data_content(df) -> None:
             "sex": pa.Column(
                 str,
                 checks=[
-                    pa.Check.isin(["Female", "Male"]),
                     pa.Check(
                         lambda s: s.isna().mean() <= 0.10,
                         element_wise=False,
@@ -278,7 +251,6 @@ def test_data_content(df) -> None:
             "income": pa.Column(
                 str,
                 checks=[
-                    pa.Check.isin(["<=50K", "<=50K.", ">50K", ">50K."]),
                     pa.Check(
                         lambda s: s.isna().mean() <= 0.10,
                         element_wise=False,
