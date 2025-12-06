@@ -16,7 +16,6 @@ age_hist = alt.Chart(adult_df).mark_bar().encode(
     width=600, 
     height=400 
 )
-
 age_hist.save('age_hist.png')
 
 
