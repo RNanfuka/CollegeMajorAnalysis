@@ -26,8 +26,8 @@ COLUMN_NAMES = [
     "income",
 ]
 
-DEFAULT_INPUT = Path("data/raw/adult.data")
-DEFAULT_OUTPUT = Path("data/adult.csv")
+DEFAULT_INPUT = Path("data/raw/adult.csv")
+DEFAULT_OUTPUT = Path("data/processed/clean_adult.csv")
 
 education_mapping = {
     "Preschool": "dropout",
