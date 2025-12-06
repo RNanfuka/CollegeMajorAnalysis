@@ -1,6 +1,10 @@
+import pandas as pd
 import altair as alt
-import matplotlib.pyplot as plt
+
 alt.data_transformers.enable("vegafusion")
+
+#Input
+adult_df = pd.read_csv("../data/train.csv")
 
 # Age Histogram 
 
