@@ -7,8 +7,10 @@ dependencies:
   - scikit-learn
   - python
   - pandas
+  - click
   - ipykernel
   - matplotlib
+  - requests
   - pandera
   - pip
   - pip:
