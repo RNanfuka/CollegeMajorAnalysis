@@ -9,6 +9,7 @@ dependencies:
   - pandas
   - ipykernel
   - matplotlib
+  - requests
   - pandera
   - pip
   - pip:
