@@ -103,7 +103,15 @@ def main(input_dir, out_dir):
     X_train_processed_df[target] = y_train.reset_index(drop=True)
 
     #Output
-    X_train_processed_df.to_csv(out_dir + "preprocessed_adult_train.csv", index=False)
+    if "train" in input_dir:
+        X_train_processed_df.to_csv(out_dir + "preprocessed_train.csv", index=False)
+        click.echo(f"Saved preprocessed_train.csv to file directory {out_dir}")
+    elif "test" in  input_dir:
+        X_train_processed_df.to_csv(out_dir + "preprocessed_test.csv", index=False)
+        click.echo(f"Saved preprocessed_test.csv to file directory {out_dir}")
+    else:
+        X_train_processed_df.to_csv(out_dir + "preprocessed_data.csv", index=False)
+        click.echo(f"Saved preprocessed_data.csv to file directory {out_dir}")
 
 if __name__ == '__main__':
     main()
