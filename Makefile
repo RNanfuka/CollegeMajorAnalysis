@@ -19,12 +19,13 @@ cl: ## create conda lock for multiple platforms
 		-p linux-64 \
 		-p osx-64 \
 		-p osx-arm64 \
-		-p win-64
+		-p win-64 \
+		-p linux-aarch64
 
 .PHONY: env
 env: ## remove previous and create environment from lock file
 	# remove the existing env, and ignore if missing
-	conda env remove -n 522-milestone || true
+	conda env remove -n 522-milestone -y || true
 	conda-lock install -n 522-milestone conda-lock.yml
 
 .PHONY: build
@@ -68,7 +69,7 @@ data-validate: ## run data validation tests
 
 .PHONY: eda
 eda: ## run data validation tests
-	python scripts/eda.py --input_dir="data/clean.csv" --out_dir="artifacts/figures/"
+	python scripts/eda.py --input_dir="data/processed/clean_adult.csv" --out_dir="artifacts/figures/"
 
 .PHONY: model-train
 model-train: ## Train with hyperparameter search and save tuned pickles/figures
