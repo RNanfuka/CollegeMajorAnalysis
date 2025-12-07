@@ -6,7 +6,8 @@ alt.data_transformers.enable("vegafusion")
 
 @click.command()
 @click.option('--input_dir', required=True, help='Path (including filename) to training data')
-def main(input_dir):
+@click.option('--out_dir', required=True, help='Path to directory where the results should be saved')
+def main(input_dir,out_dir):
     #Input
     adult_df = pd.read_csv(input_dir)
 
@@ -20,7 +21,7 @@ def main(input_dir):
         width=600, 
         height=400 
     )
-    age_hist.save('age_hist.png')
+    age_hist.save(out_dir+'age_hist.png')
 
     # Age Density Plot
     age_density = alt.Chart(adult_df).transform_density(
@@ -35,7 +36,7 @@ def main(input_dir):
         color='income'
     )
 
-    age_density.save('age_density.png')
+    age_density.save(out_dir+'age_density.png')
 
     # Marital Status - Frequency Chart
     marital_status_freq = alt.Chart(adult_df).mark_bar().encode(
@@ -46,7 +47,7 @@ def main(input_dir):
         height=100 
     )
 
-    marital_status_freq.save('marital_status_freq.png')
+    marital_status_freq.save(out_dir+'marital_status_freq.png')
 
     # Race - Frequency Chart
     race_freq = alt.Chart(adult_df).mark_bar().encode(
@@ -57,7 +58,7 @@ def main(input_dir):
         height=200 
     )
 
-    race_freq.save('race_freq.png')
+    race_freq.save(out_dir+'race_freq.png')
 
     # Education - Frequency Chart
     edu_freq = alt.Chart(adult_df).mark_bar().encode(
@@ -68,7 +69,7 @@ def main(input_dir):
         height=200 
     )
 
-    edu_freq.save('edu_freq.png')
+    edu_freq.save(out_dir+'edu_freq.png')
 
     # Work Class - Frequency Chart
     wc_freq = alt.Chart(adult_df).mark_bar().encode(
@@ -79,21 +80,24 @@ def main(input_dir):
         height=200 
     )
 
-    edu_freq.save('edu_freq.png')
+    edu_freq.save(out_dir+'edu_freq.png')
 
 
     # Native Country - Frequency Chart
     #adult_df['native-country'].value_counts()
 
-    nc_freq = alt.Chart(adult_df).mark_bar().encode(
-        x='count()',
-        y=alt.Y('native-country', title='Native Country').sort('x')
-    ).properties(
-        width=300,  
-        height=200 
-    )
+    nc_freq  = alt.Chart(adult_df).mark_bar().encode(
+    x='count()',
+    y=alt.Y('native-country:N', title='Native Country', sort='-x'),
+    tooltip=['native-country', 'count()']
+).properties(
+    width=400,
+    height=600,
+    title='Native Country Distribution'
+)
 
-    nc_freq.save('nc_freq.png')
+
+    nc_freq.save(out_dir+'nc_freq.png')
 
     # alt.Chart(adult_df).mark_point(opacity=0.6, size=2).encode(
     #     alt.X(alt.repeat('row')).type('quantitative'),
@@ -131,7 +135,7 @@ def main(input_dir):
 
     corr_heatmap = (heatmap + labels).configure_axis(labelAngle=-45)
 
-    corr_heatmap.save('corr_heatmap.png')
+    corr_heatmap.save(out_dir+'corr_heatmap.png')
 
     # Prediction Class Distribution
     pred_class_dist = alt.Chart(adult_df).mark_bar().encode(
@@ -143,7 +147,7 @@ def main(input_dir):
         height=300  
     )
 
-    pred_class_dist.save('pred_class_dist.png')
+    pred_class_dist.save(out_dir+'pred_class_dist.png')
 
 if __name__ == '__main__':
     main()
