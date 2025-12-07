@@ -68,7 +68,7 @@ data-validate: ## run data validation tests
 
 .PHONY: eda
 eda: ## run data validation tests
-	python scripts/eda.py --input_dir="data/clean.csv" --out_dir="artifacts/figures/"
+	python scripts/eda.py --input_dir="data/processed/clean_adult.csv" --out_dir="artifacts/figures/"
 
 .PHONY: model-train
 model-train: ## Train with hyperparameter search and save tuned pickles/figures
