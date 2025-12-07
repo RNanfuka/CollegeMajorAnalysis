@@ -1,4 +1,4 @@
-name: 522-milestone
+make name: 522-milestone
 channels:
   - conda-forge
 dependencies:
@@ -13,7 +13,12 @@ dependencies:
   - matplotlib
   - requests
   - pandera
+  - click
   - pip
   - pip:
     - vegafusion
     - altair
+    - vl-convert-python
+    - click
+    - pyarrow
+

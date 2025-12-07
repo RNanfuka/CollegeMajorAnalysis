@@ -34,6 +34,7 @@ data_train, data_test = train_test_split(
 adult_df = data_train.reset_index(drop=True)
 data_test = data_test.reset_index(drop=True)
 
+# - - - - - - - - - - - - - - - - - - - - - - - Roganci Extracting Code - - - - - - - - - - - - - - - - - - - - - - - 
 adult_df.head(5)
 adult_df.tail(5)
 adult_df.shape
@@ -181,6 +182,8 @@ alt.Chart(adult_df).mark_bar().encode(
     width=400, 
     height=300  
 )
+
+# - - - - - - - - - - - - - - - - - - - - - - - Roganci Extracting Code - - - - - - - - - - - - - - - - - - - - - - - 
 
 # Preprocessing
 from sklearn.model_selection import train_test_split
