@@ -1,0 +1,85 @@
+---
+title: "Predicting Adult Income via Demographics Data"
+author: "Chun-Mien (Alan) Liu, Rebecca Rosette Nanfuka, Roganci Fontelera, Yonas Gebre Marie"
+jupyter: python3
+format:
+  html:
+    toc: true
+    toc-depth: 3
+bibliography: references.bib
+execute:
+  echo: false
+---
+
+```{python}
+import pandas as pd
+import numpy as np
+from IPython.display import Markdown, display
+from tabulate import tabulate
+```
+
+```{python}
+cv_summary = pd.read_csv("../artifacts/tables/cv_summary.csv", index_col="model")
+lr_accuracy = str(np.round(cv_summary.loc['LogisticRegression', 'test_accuracy_mean'], 3))
+rbf_accuracy = str(np.round(cv_summary.loc['SVM-RBF', 'test_accuracy_mean'], 3))
+```
+
+## Summary
+Here, we tried to find the classification models with the highest accuracy on predicting if an individual's income is greater than 50K/yr based on census data. Our final classifier has a reasonable performance on the unseen test data. We observed the Logistic Regression validation accuracy of `{python} lr_accuracy` and the RBF-SVM test accuracy of `{python} rbf_accuracy`.
+
+The prediction model can possibly be further improved by pruning more features that are irrelevant to the prediction, since we are using almost all of the features for fitting the classifiers.
+
+## Introduction
+
+A lot of factors impact an individual's income. We see how wealth remains concentrated as the top 1% held 35% of the total wealth in 2022 (@kuhn2025income). More recently, from 2024 to 2025, the U.S. Federal Reserve shows 35% of the family income less than 50K per year (@fed2025households). It is a big topic because it involves each family's economic well-being.
+
+This notebook explores the Adult Income dataset to understand how different demographic and employment characteristics relate to whether a person earns more or less than \$50,000 per year. The analysis begins with exploring patterns in the data, identifying any issues, and preparing the dataset for modeling. After cleaning and preprocessing, we build and evaluate predictive models to see how well income levels can be predicted using the available features.
+
+## Methods
+
+### Data
+
+The data set used here is from UC Irvine Machine Learning Repository, extracted by Barry Becker from the 1994 Census database (@uci_adult).
+
+### Analysis
+
+The algorithms below are considered for predicting whether if an individual's income was above 50K/year or not: decision tree, k-nearest neighbors (k-nn), support vector machine with RBF kernel (SVM-RBF), logistic regression, gaussian naive bayes. All variables were used to fit the model, with the exception of: - `fnlwgt`: useless, since each row has a unique value - `education-num`: due to redundancy with `education` - `race`: for ethical reasons.
+
+Data was split with 80% into the test set, and 20% into the train set to increase training time due to the vast amount of data. Imputation, one-hot encoding, and ordinal encoding are all done accordingly with details explained below. For model selection, we first conduct 5-fold cross-validation on all the models with default hyperparameters. Then, we select the top two models (Logistic Regression and SVM-RBF) to conduct a random search of hyperparameters with 5-fold cross-validation using accuracy as the classification metric. Finally, we used the best estimators of each to determine their accuracies on unseen test data.
+
+# EDA
+
+![Income class distribution. Counts for `<=50K` vs `>50K` show the class mix before modeling.](../artifacts/figures/pred_class_dist.png){#fig-class-dist width="80%"}
+
+Here in @fig-class-dist, we see the income class balance to guide feature choices and any class weighting.
+
+![Features Correlations Heatmap.](../artifacts/figures/corr_heatmap.png){#fig-corr-heatmap width="80%"}
+
+Here in @fig-corr-heatmap, we see that there are no strong correlations between any pair of features, showing that there might not be collinearity issues.
+
+### Model comparison and interpretation
+
+```{python}
+#| label: tbl-cv-summary
+#| tbl-cap: Cross validation summary for different models.
+cv_summary = cv_summary.reset_index()
+Markdown(cv_summary.to_markdown(index = False))
+```
+
+From @tbl-cv-summary, we can see RBF-SVM is a bit more accurate. Logistic Regression is close in accuracy, and its interpretability is better with its coefficients and odds ratios. So use LR when you need explanations; use SVM if you want the tiny accuracy edge.
+
+### Visual checks for interpretability
+
+![Top Postive and Negative Logistic Regression Coefficients.](../artifacts/figures/log_reg_coefficients.png){#fig-logreg-coef width="80%"}
+
+@fig-logreg-coef show the strongest positive and negative LR coefficients.
+
+### Results and Discussion
+
+From the analyses above, we discovered that logistic regression and SVM RBF are the best classification models for predicting income, among all the other classification algorithms. The Logistic Regression achieves validation accuracy of `{python} lr_accuracy` and the RBF-SVM achieves validation accuracy of `{python} rbf_accuracy`. This is somewhat surprising because logistic regression is a baseline model for classifications.
+
+From the logistic regression coefficients, we find that key features include capital gains, occupations, native countries, and relationships, are especially related to determining income levels.
+
+For our next step, we should potentially prune some other irrelevant features to reduce noise in the models and achieve a better result. We can achieve this analyzing Pearson and Kendall correlation coefficients, PCA, or factor analysis (@adhithya2025income). Other ideas include grouping rare country categories to make the model steadier and easier to explain.
+
+## References
