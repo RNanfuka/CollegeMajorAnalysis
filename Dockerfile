@@ -8,9 +8,8 @@ COPY conda-lock.yml conda-lock.yml
 RUN conda install -n base -c conda-forge conda-lock jupyterlab nb_conda_kernels -y
 RUN conda-lock install -n 522-milestone conda-lock.yml
 
-# --- NEW: Install Quarto for ARM64 Manually ---
-# 1. Install curl (needed to download the file)
-RUN apt-get update && apt-get install -y curl
+# Install system utilities (Make, Curl, etc.)
+RUN apt-get update && apt-get install -y make curl
 
 # 2. Download and install the specific ARM64 .deb file
 # (We use version 1.8.26 here, but you can update the URL to a newer version later)

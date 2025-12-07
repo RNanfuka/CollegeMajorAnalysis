@@ -1,8 +1,6 @@
 # Adult Income Prediction
 
-## Introduction
-This project uses the Adult Income dataset to explore general patterns in income inequality. Our aim is to understand, at a high level, how personal and work-related characteristics relate to income categories and to build a clear, reproducible starting point for further analysis.
-
+This project explores the Adult Income dataset to understand how demographic and work-related factors relate to earning more or less than \$50,000 per year. It includes a reproducible pipeline for data prep, modeling, and a Quarto report.
 
 ## Contributors
 - Chun-Mien Liu
@@ -10,56 +8,93 @@ This project uses the Adult Income dataset to explore general patterns in income
 - Roganci Fontelera
 - Yonas Gebre Marie
 
-## Project overview
+## Requirements
+- Docker Desktop (or Docker Engine)
+- Make (optional, for shortcuts)
+- Quarto inside the container for rendering (see setup below)
 
-This project examines the Adult Income dataset to understand how demographic and socioeconomic factors influence whether an individual earns more or less than $50,000 per year. By analyzing variables such as age, education level, occupation, marital status, work hours, and race, the project uncovers broad patterns in income distribution and highlights which characteristics are most strongly associated with higher earnings. The goal is to provide a clear, high-level perspective on income inequality across different demographic groups while building a reproducible and transparent foundation for further data exploration and modeling.
+## Getting started
+1) Clone and enter the repo
+```bash
+git clone <repo-url> IncomePrediction
+cd IncomePrediction
+```
 
-## How to run the analysis
-1. Clone the repository and move into it: 
+2) Build the image
+```bash
+make build        # or: docker compose build
 ```
-git clone <repo-url> && cd AdultIncomePrediction
+
+3) Start the container (JupyterLab on host port 8878)
+```bash
+docker compose up -d
 ```
-2. Run the following command to start docker container:
+- Check logs for the Jupyter token: `docker compose logs -f 522-milestone`
+- Open the printed URL but swap the port to `8878` (e.g., `http://127.0.0.1:8878/?token=...`).
+- Adjust the port in `docker-compose.yml` if you need a different host port.
+
+4) In JupyterLab, open a Terminal (from the “+ Launcher” or File → New → Terminal) and activate the env
+```bash
+eval "$(/opt/conda/bin/conda shell.bash hook)"
+conda activate 522-milestone
+
 ```
-docker compose up
-```
-3. In the terminal, look for a URL that starts with 
-`http://127.0.0.1:8888/lab?token=` 
-(for an example, see the highlighted text in the terminal below). 
-Copy and paste that URL into your browser.
-4. To run the analysis,
-open a terminal and run the following commands:
-```
+
+5) Run the pipeline from that JupyterLab terminal  
+**All steps at once:**
+```bash
 make run-all-py
 ```
-5. Navigate to the `reports` directory:
-```
-cd reports
-```
-6. Generate HTML:
-```
-quarto render income-prediction.qmd
-```
-5. Run `quarto preview`, and open up the URL mentioned in the terminal output to see the HTML:
-```
-quarto preview income-prediction.qmd
-```
+This downloads data, cleans/splits it, runs validations/EDA, trains models (with HPO), and regenerates artifacts.
 
-### Clean up
-To shut down the container and clean up the resources, 
-type `Ctrl` + `C` in the terminal
-where you launched the container, and then type `docker compose rm`
+**Or run steps individually:**
+- Download raw data: `make download-data`
+- Clean data: `make clean-data`
+- Validate cleaned data: `make data-validate`
+- Train/test split: `make split-data`
+- Exploratory analysis figs: `make eda`
+- Feature preprocessing (train/test): `make preprocess-data`
+- Hyperparameter search + model training: `make model-train`
+- Reuse tuned models to regenerate outputs (skip HPO): `make model-reuse`
 
-## Dependencies
-- Docker Desktop
+What each step produces (paths):
+- Raw data: `data/raw/` (downloaded from UCI)
+- Cleaned + split CSVs: `data/processed/clean_adult.csv`, `data/processed/train.csv`, `data/processed/test.csv`
+- Validation report/logs: printed to terminal from `make data-validate` (non-blocking)
+- EDA figures: `artifacts/figures/`
+- Preprocessed train/test matrices: `data/processed/train_preprocessed.parquet`, `data/processed/test_preprocessed.parquet`
+- Models, metrics, and tuning artifacts: `artifacts/` (tables, pickles, plots)
+
+## Quarto report
+Quarto must be available inside the container (install with `mamba install -n 522-milestone -c conda-forge quarto` if missing).
+
+Use the JupyterLab terminal (with the env activated) to render:
+```bash
+quarto render reports/income-prediction.qmd
+```
+Preview (inside the container):
+```bash
+quarto preview reports/income-prediction.qmd --host 0.0.0.0 --port 8889
+```
+Then open `http://localhost:8889` in your browser (add `- "8889:8889"` to `docker-compose.yml` if the port is not already mapped).
+Notes:
+- If you want Quarto baked into the image, add `quarto` to `environment.yml`, regenerate locks, and rebuild.
+- Preview uses an extra port; if you prefer not to expose it, render to HTML only.
+
+## Clean up
+- Stop services: `docker compose down`
+- Remove stopped containers: `docker compose rm`
+
+## Troubleshooting
+- Jupyter URL/port mismatch: check `docker-compose.yml` port mapping and use that host port in the URL token.
+- Conda not found in JupyterLab terminal: run `eval "$(/opt/conda/bin/conda shell.bash hook)"` before `conda activate 522-milestone`.
+- Quarto not found: install in the container env (`mamba install -n 522-milestone -c conda-forge quarto`) or rebuild with it baked in.
+- Stale artifacts: remove `data/processed/` and `artifacts/` if you need a clean run, then rerun the pipeline.
 
 ## License
-This repository is distributed under the MIT License (see `LICENSE` for the full text).
+Distributed under the MIT License (see `LICENSE`).
 
 ## References
-
-UCI Machine Learning Repository. (1996). Adult Dataset.
-Retrieved from: https://archive.ics.uci.edu/dataset/2/adult
-Kohavi, R. (1996). Scaling Up the Accuracy of Naive-Bayes Classifiers: A Decision-Tree Hybrid. Proceedings of the Second International Conference on Knowledge Discovery and Data Mining (KDD).
-U.S. Census Bureau. Current Population Survey (CPS). https://www.census.gov/programs-surveys/cps.html
-
+- UCI Machine Learning Repository. (1996). Adult Dataset. https://archive.ics.uci.edu/dataset/2/adult
+- Kohavi, R. (1996). Scaling Up the Accuracy of Naive-Bayes Classifiers: A Decision-Tree Hybrid. Proceedings of the Second International Conference on Knowledge Discovery and Data Mining (KDD).
+- U.S. Census Bureau. Current Population Survey (CPS). https://www.census.gov/programs-surveys/cps.html
