@@ -5,10 +5,9 @@ from sklearn.model_selection import train_test_split # Clean labels and split ea
 # Main function
 @click.command()
 @click.option('--input_dir', required=True, help='Path (including filename) to raw data')
-@click.option('--train_out_dir', required=True, help='Path to directory where the train data should be saved')
-@click.option('--test_out_dir', required=True, help='Path to directory where the test data should be saved')
+@click.option('--out_dir', required=True, help='Path to directory where the train and test data should be saved')
 
-def main(input_dir, train_out_dir, test_out_dir):
+def main(input_dir, out_dir):
     #Input
     adult_df = pd.read_csv(input_dir)
 
@@ -26,11 +25,11 @@ def main(input_dir, train_out_dir, test_out_dir):
     data_test = data_test.reset_index(drop=True)
 
     #Output 
-    adult_df.to_csv(train_out_dir + "train.csv", index=False) 
-    data_test.to_csv(test_out_dir + "test.csv", index=False)
+    adult_df.to_csv(out_dir + "train.csv", index=False) 
+    data_test.to_csv(out_dir + "test.csv", index=False)
 
-    click.echo(f"Saved train.csv to file directory {train_out_dir}")
-    click.echo(f"Saved test.csv to file directory {test_out_dir}")
+    click.echo(f"Saved train.csv to file directory {out_dir}")
+    click.echo(f"Saved test.csv to file directory {out_dir}")
 
 if __name__ == '__main__':
     main()
