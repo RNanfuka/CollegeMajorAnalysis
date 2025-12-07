@@ -21,41 +21,6 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-/* CSS for syntax highlighting */
-html { -webkit-text-size-adjust: 100%; }
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-  }
-pre.numberSource { margin-left: 3em;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-}
 /* CSS for citations */
 div.csl-bib-body { }
 div.csl-entry {
@@ -92,35 +57,6 @@ div.csl-indent {
 <link href="income-prediction_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="income-prediction_files/libs/bootstrap/bootstrap-9e3ffae467580fdb927a41352e75a2e0.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 
-  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
-
-<script type="text/javascript">
-const typesetMath = (el) => {
-  if (window.MathJax) {
-    // MathJax Typeset
-    window.MathJax.typeset([el]);
-  } else if (window.katex) {
-    // KaTeX Render
-    var mathElements = el.getElementsByClassName("math");
-    var macros = [];
-    for (var i = 0; i < mathElements.length; i++) {
-      var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
-        window.katex.render(texText.data, mathElements[i], {
-          displayMode: mathElements[i].classList.contains('display'),
-          throwOnError: false,
-          macros: macros,
-          fleqn: false
-        });
-      }
-    }
-  }
-}
-window.Quarto = {
-  typesetMath
-};
-</script>
 
 </head>
 
@@ -139,27 +75,11 @@ window.Quarto = {
   <li><a href="#data" id="toc-data" class="nav-link" data-scroll-target="#data">Data</a></li>
   <li><a href="#analysis" id="toc-analysis" class="nav-link" data-scroll-target="#analysis">Analysis</a></li>
   </ul></li>
-  <li><a href="#code-portion" id="toc-code-portion" class="nav-link" data-scroll-target="#code-portion">Code Portion</a>
-  <ul class="collapse">
-  <li><a href="#load-data" id="toc-load-data" class="nav-link" data-scroll-target="#load-data">Load Data</a></li>
-  </ul></li>
-  <li><a href="#summary-1" id="toc-summary-1" class="nav-link" data-scroll-target="#summary-1">Summary</a></li>
-  <li><a href="#clean-up" id="toc-clean-up" class="nav-link" data-scroll-target="#clean-up">Clean up</a></li>
   <li><a href="#eda" id="toc-eda" class="nav-link" data-scroll-target="#eda">EDA</a>
   <ul class="collapse">
-  <li><a href="#preprocessing-pipeline" id="toc-preprocessing-pipeline" class="nav-link" data-scroll-target="#preprocessing-pipeline">Preprocessing pipeline</a></li>
-  <li><a href="#column-preprocessing" id="toc-column-preprocessing" class="nav-link" data-scroll-target="#column-preprocessing">Column preprocessing</a>
-  <ul class="collapse">
-  <li><a href="#baseline-and-model-comparison" id="toc-baseline-and-model-comparison" class="nav-link" data-scroll-target="#baseline-and-model-comparison">Baseline and model comparison</a></li>
-  <li><a href="#hyperparameter-tuning-for-top-models" id="toc-hyperparameter-tuning-for-top-models" class="nav-link" data-scroll-target="#hyperparameter-tuning-for-top-models">Hyperparameter tuning for top models</a></li>
-  <li><a href="#test-set-evaluation" id="toc-test-set-evaluation" class="nav-link" data-scroll-target="#test-set-evaluation">Test set evaluation</a></li>
   <li><a href="#model-comparison-and-interpretation" id="toc-model-comparison-and-interpretation" class="nav-link" data-scroll-target="#model-comparison-and-interpretation">Model comparison and interpretation</a></li>
-  </ul></li>
-  <li><a href="#logistic-regression-interpretation" id="toc-logistic-regression-interpretation" class="nav-link" data-scroll-target="#logistic-regression-interpretation">Logistic Regression interpretation</a>
-  <ul class="collapse">
   <li><a href="#visual-checks-for-interpretability" id="toc-visual-checks-for-interpretability" class="nav-link" data-scroll-target="#visual-checks-for-interpretability">Visual checks for interpretability</a></li>
   <li><a href="#results-and-discussion" id="toc-results-and-discussion" class="nav-link" data-scroll-target="#results-and-discussion">Results and Discussion</a></li>
-  </ul></li>
   <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
   </ul></li>
   </ul>
@@ -194,7 +114,7 @@ window.Quarto = {
 
 <section id="summary" class="level2">
 <h2 class="anchored" data-anchor-id="summary">Summary</h2>
-<p>Here, we tried to find the classification models with the highest accuracy on predicting if an individual’s income is greater than 50K/yr based on census data. Our final classifier has a reasonable performance on the unseen test data. We observed the Logistic Regression test accuracy of <span class="math inline">\(0.848\)</span> and the RBF-SVM test accuracy of <span class="math inline">\(0.855\)</span>.</p>
+<p>Here, we tried to find the classification models with the highest accuracy on predicting if an individual’s income is greater than 50K/yr based on census data. Our final classifier has a reasonable performance on the unseen test data. We observed the Logistic Regression validation accuracy of 0.849 and the RBF-SVM test accuracy of 0.855.</p>
 <p>The prediction model can possibly be further improved by pruning more features that are irrelevant to the prediction, since we are using almost all of the features for fitting the classifiers.</p>
 </section>
 <section id="introduction" class="level2">
@@ -211,551 +131,147 @@ window.Quarto = {
 <section id="analysis" class="level3">
 <h3 class="anchored" data-anchor-id="analysis">Analysis</h3>
 <p>The algorithms below are considered for predicting whether if an individual’s income was above 50K/year or not: decision tree, k-nearest neighbors (k-nn), support vector machine with RBF kernel (SVM-RBF), logistic regression, gaussian naive bayes. All variables were used to fit the model, with the exception of: - <code>fnlwgt</code>: useless, since each row has a unique value - <code>education-num</code>: due to redundancy with <code>education</code> - <code>race</code>: for ethical reasons.</p>
-<p>Data was split with 80% into the test set, and 20% into the train set to increase training time due to the vast amount of data. Imputation, one-hot encoding, and ordinal encoding are all done accordingly with details explained below. For model selection, we first conduct 5-fold cross-validation on all the models with default hyperparameters. Then, we select the top two models (Logistic Regression and SVM-RBF) to conduct a random search of hyperparameters with 3-fold cross-validation using accuracy as the classification metric. Finally, we used the best estimators of each to determine their accuracies on unseen test data.</p>
+<p>Data was split with 80% into the test set, and 20% into the train set to increase training time due to the vast amount of data. Imputation, one-hot encoding, and ordinal encoding are all done accordingly with details explained below. For model selection, we first conduct 5-fold cross-validation on all the models with default hyperparameters. Then, we select the top two models (Logistic Regression and SVM-RBF) to conduct a random search of hyperparameters with 5-fold cross-validation using accuracy as the classification metric. Finally, we used the best estimators of each to determine their accuracies on unseen test data.</p>
 </section>
-</section>
-<section id="code-portion" class="level2">
-<h2 class="anchored" data-anchor-id="code-portion">Code Portion</h2>
-<section id="load-data" class="level3">
-<h3 class="anchored" data-anchor-id="load-data">Load Data</h3>
-<p>Download the Adult income data from UCI using <code>fetch_ucirepo(id=2)</code> so we start from the original columns and labels each time.</p>
-<p>If the CSV copy is already saved, load it from disk to avoid re-downloading and to keep the same starting point for every run.</p>
-<p>Make an early stratified train/test split (80% test here because the dataset is large) so everything after this cell only uses the training data and we avoid leakage.</p>
-</section>
-</section>
-<section id="summary-1" class="level2">
-<h2 class="anchored" data-anchor-id="summary-1">Summary</h2>
-<p>Check head/tail, shape, data types, and basic stats to get a quick feel for the data and catch obvious issues before doing more work.</p>
-<div id="12bb4de0" class="cell" data-execution_count="1">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>adult_df.tail(<span class="dv">5</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-<div id="8bd5e27b" class="cell" data-execution_count="2">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>adult_df.shape</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-<div id="c92b4140" class="cell" data-execution_count="3">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>adult_df.info()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-<div id="56a67afb" class="cell" data-execution_count="4">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>adult_df.describe().T.<span class="bu">round</span>(<span class="dv">2</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-<div id="fee3422a" class="cell" data-execution_count="5">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>adult_df.nunique()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-<div id="93701cdf" class="cell" data-execution_count="6">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>adult_df.isnull().<span class="bu">sum</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-<p>Use summary tables (shape, types, describe, unique counts, missing values) to see how big the data is, how many categories we have, and where values are missing.</p>
-<div id="e742c2c7" class="cell" data-execution_count="7">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> col <span class="kw">in</span> adult_df.columns:</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"Unique values in column '</span><span class="sc">{</span>col<span class="sc">}</span><span class="ss">':"</span>)</span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(adult_df[col].unique())</span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"-"</span> <span class="op">*</span> <span class="dv">20</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-</section>
-<section id="clean-up" class="level2">
-<h2 class="anchored" data-anchor-id="clean-up">Clean up</h2>
-<p>Turn <code>?</code> into <code>NaN</code>, standardize the income labels to <code>&lt;=50K</code> and <code>&gt;50K</code>, and group education and marital status levels to reduce noise and make modeling easier.</p>
-<div id="216825b4" class="cell" data-execution_count="8">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>adult_df.replace(<span class="st">'?'</span>, np.nan, inplace<span class="op">=</span><span class="va">True</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-<div id="b99affce" class="cell" data-execution_count="9">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>adult_df.isnull().<span class="bu">sum</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-<div id="ddbf2541" class="cell" data-execution_count="10">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>adult_df[<span class="st">'income'</span>] <span class="op">=</span> adult_df[<span class="st">'income'</span>].<span class="bu">str</span>.replace(<span class="st">'&lt;=50K.'</span>, <span class="st">'&lt;=50K'</span>)</span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>adult_df[<span class="st">'income'</span>] <span class="op">=</span> adult_df[<span class="st">'income'</span>].<span class="bu">str</span>.replace(<span class="st">'&gt;50K.'</span>, <span class="st">'&gt;50K'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-<div id="b3439d58" class="cell" data-execution_count="11">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>education_mapping <span class="op">=</span> {</span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">'Preschool'</span>: <span class="st">'dropout'</span>,</span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">'10th'</span>: <span class="st">'dropout'</span>,</span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">'11th'</span>: <span class="st">'dropout'</span>,</span>
-<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">'12th'</span>: <span class="st">'dropout'</span>,</span>
-<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">'1st-4th'</span>: <span class="st">'dropout'</span>,</span>
-<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">'5th-6th'</span>: <span class="st">'dropout'</span>,</span>
-<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">'7th-8th'</span>: <span class="st">'dropout'</span>,</span>
-<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>    <span class="st">'9th'</span>: <span class="st">'dropout'</span>,</span>
-<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>    <span class="st">'HS-Grad'</span>: <span class="st">'HighGrad'</span>,</span>
-<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>    <span class="st">'HS-grad'</span>: <span class="st">'HighGrad'</span>,</span>
-<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a>    <span class="st">'Some-college'</span>: <span class="st">'CommunityCollege'</span>,</span>
-<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a>    <span class="st">'Assoc-acdm'</span>: <span class="st">'CommunityCollege'</span>,</span>
-<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a>    <span class="st">'Assoc-voc'</span>: <span class="st">'CommunityCollege'</span>,</span>
-<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a>    <span class="st">'Masters'</span>: <span class="st">'Masters'</span>,</span>
-<span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a>    <span class="st">'Prof-school'</span>: <span class="st">'Masters'</span>,</span>
-<span id="cb11-17"><a href="#cb11-17" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb11-18"><a href="#cb11-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-19"><a href="#cb11-19" aria-hidden="true" tabindex="-1"></a>adult_df[<span class="st">'education'</span>] <span class="op">=</span> adult_df[<span class="st">'education'</span>].replace(education_mapping)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-<div id="390477ce" class="cell" data-execution_count="12">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>marital_status_mapping <span class="op">=</span> {</span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">'Never-married'</span>: <span class="st">'NotMarried'</span>,</span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">'Married-AF-spouse'</span>: <span class="st">'Married'</span>,</span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">'Married-civ-spouse'</span>: <span class="st">'Married'</span>,</span>
-<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">'Married-spouse-absent'</span>: <span class="st">'NotMarried'</span>,</span>
-<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">'Separated'</span>: <span class="st">'Separated'</span>,</span>
-<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">'Divorced'</span>: <span class="st">'Separated'</span>,</span>
-<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">'Widowed'</span>: <span class="st">'Widowed'</span></span>
-<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>adult_df[<span class="st">'marital-status'</span>] <span class="op">=</span> adult_df[<span class="st">'marital-status'</span>].replace(marital_status_mapping)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
 </section>
 <section id="eda" class="level1">
 <h1>EDA</h1>
-<p>Plot key distributions for age, education, workclass, race, marital status, and native country. Also look at the income class balance to guide feature choices and any class weighting.</p>
-<div id="cd7b1755" class="cell" data-execution_count="13">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>alt.Chart(adult_df).mark_bar().encode(</span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>    alt.X(<span class="st">'age:Q'</span>, <span class="bu">bin</span><span class="op">=</span>alt.Bin(maxbins<span class="op">=</span><span class="dv">20</span>), title<span class="op">=</span><span class="st">'Age'</span>), </span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>    alt.Y(<span class="st">'count():Q'</span>, title<span class="op">=</span><span class="st">'Count'</span>), </span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>    color<span class="op">=</span><span class="st">'income:N'</span>, </span>
-<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>).properties(</span>
-<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>    width<span class="op">=</span><span class="dv">600</span>, </span>
-<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>    height<span class="op">=</span><span class="dv">400</span> </span>
-<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="fig-class-dist" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-class-dist-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="../artifacts/figures/pred_class_dist.png" class="img-fluid figure-img" style="width:80.0%">
 </div>
-<div id="06af840c" class="cell" data-execution_count="14">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>alt.Chart(adult_df).transform_density(</span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>     <span class="st">'age'</span>,</span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>     groupby<span class="op">=</span>[<span class="st">'income'</span>],</span>
-<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>     as_<span class="op">=</span>[<span class="st">'age'</span>, <span class="st">'density'</span>],</span>
-<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>).mark_area(</span>
-<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>     opacity<span class="op">=</span><span class="fl">0.4</span></span>
-<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a> ).encode(</span>
-<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>     x<span class="op">=</span><span class="st">'age'</span>,</span>
-<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>     y<span class="op">=</span>alt.Y(<span class="st">'density:Q'</span>).stack(<span class="va">False</span>),</span>
-<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>     color<span class="op">=</span><span class="st">'income'</span></span>
-<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-class-dist-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1: Income class distribution. Counts for <code>&lt;=50K</code> vs <code>&gt;50K</code> show the class mix before modeling.
+</figcaption>
+</figure>
 </div>
-<div id="2362984f" class="cell" data-execution_count="15">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>alt.Chart(adult_df).mark_bar().encode(</span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>    alt.X(<span class="st">'count():Q'</span>, title<span class="op">=</span><span class="st">'Count'</span>),</span>
-<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>    alt.Y(<span class="st">'marital-status:N'</span>, title<span class="op">=</span><span class="st">'Marital Status'</span>).sort(<span class="st">'x'</span>)</span>
-<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>).properties(</span>
-<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>    width<span class="op">=</span><span class="dv">300</span>,  </span>
-<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>    height<span class="op">=</span><span class="dv">100</span> </span>
-<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Here in <a href="#fig-class-dist" class="quarto-xref">Figure&nbsp;1</a>, we see the income class balance to guide feature choices and any class weighting.</p>
+<div id="fig-corr-heatmap" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-corr-heatmap-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="../artifacts/figures/corr_heatmap.png" class="img-fluid figure-img" style="width:80.0%">
 </div>
-<div id="881a0b55" class="cell" data-execution_count="16">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>alt.Chart(adult_df).mark_bar().encode(</span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>    alt.X(<span class="st">'count():Q'</span>, title<span class="op">=</span><span class="st">'Count'</span>),</span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>    alt.Y(<span class="st">'race:N'</span>, title<span class="op">=</span><span class="st">'Race'</span>).sort(<span class="st">'x'</span>)</span>
-<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>).properties(</span>
-<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>    width<span class="op">=</span><span class="dv">300</span>,  </span>
-<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>    height<span class="op">=</span><span class="dv">200</span> </span>
-<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-corr-heatmap-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2: Features Correlations Heatmap.
+</figcaption>
+</figure>
 </div>
-<div id="efcdf6e6" class="cell" data-execution_count="17">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>alt.Chart(adult_df).mark_bar().encode(</span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>    x<span class="op">=</span><span class="st">'count()'</span>,</span>
-<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>    y<span class="op">=</span>alt.Y(<span class="st">'education'</span>, title<span class="op">=</span><span class="st">'Education'</span>).sort(<span class="st">'x'</span>)</span>
-<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>).properties(</span>
-<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>    width<span class="op">=</span><span class="dv">300</span>,  </span>
-<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>    height<span class="op">=</span><span class="dv">200</span> </span>
-<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-<div id="bb912c26" class="cell" data-execution_count="18">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>alt.Chart(adult_df).mark_bar().encode(</span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>    x<span class="op">=</span><span class="st">'count()'</span>,</span>
-<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>    y<span class="op">=</span>alt.Y(<span class="st">'workclass'</span>, title<span class="op">=</span><span class="st">'Work Class'</span>).sort(<span class="st">'x'</span>)</span>
-<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>).properties(</span>
-<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>    width<span class="op">=</span><span class="dv">300</span>,  </span>
-<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>    height<span class="op">=</span><span class="dv">200</span> </span>
-<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-<div id="c6ff9819" class="cell" data-execution_count="19">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>adult_df[<span class="st">'native-country'</span>].value_counts()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-<div id="1470a561" class="cell" data-execution_count="20">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># alt.Chart(adult_df).mark_point(opacity=0.6, size=2).encode(</span></span>
-<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="co">#     alt.X(alt.repeat('row')).type('quantitative'),</span></span>
-<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="co">#     alt.Y(alt.repeat('column')).type('quantitative'),</span></span>
-<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a><span class="co">#     color='income'  # Map 'prediction' to color (nominal type)</span></span>
-<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a><span class="co"># ).properties(</span></span>
-<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a><span class="co">#     width=130,</span></span>
-<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a><span class="co">#     height= 130</span></span>
-<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a><span class="co"># ).repeat(</span></span>
-<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a><span class="co">#     column=['age','education-num','capital-gain','capital-loss','hours-per-week'],</span></span>
-<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a><span class="co">#     row=['age', 'education-num','capital-gain','capital-loss','hours-per-week']</span></span>
-<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a><span class="co"># )</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-<div id="007a30fe" class="cell" data-execution_count="21">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Altair correlation heatmap for numeric features</span></span>
-<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>corr <span class="op">=</span> adult_df.corr(numeric_only<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>numeric_cols <span class="op">=</span> corr.columns.tolist()</span>
-<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>corr_long <span class="op">=</span> corr.stack().reset_index()</span>
-<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>corr_long.columns <span class="op">=</span> [<span class="st">'var1'</span>, <span class="st">'var2'</span>, <span class="st">'corr'</span>]</span>
-<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a>heatmap <span class="op">=</span> alt.Chart(corr_long).mark_rect().encode(</span>
-<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a>    x<span class="op">=</span>alt.X(<span class="st">'var1:N'</span>, sort<span class="op">=</span>numeric_cols, title<span class="op">=</span><span class="st">''</span>),</span>
-<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a>    y<span class="op">=</span>alt.Y(<span class="st">'var2:N'</span>, sort<span class="op">=</span><span class="bu">list</span>(<span class="bu">reversed</span>(numeric_cols)), title<span class="op">=</span><span class="st">''</span>),</span>
-<span id="cb21-11"><a href="#cb21-11" aria-hidden="true" tabindex="-1"></a>    color<span class="op">=</span>alt.Color(<span class="st">'corr:Q'</span>, scale<span class="op">=</span>alt.Scale(scheme<span class="op">=</span><span class="st">'redblue'</span>, domain<span class="op">=</span>[<span class="op">-</span><span class="dv">1</span>, <span class="dv">1</span>]), title<span class="op">=</span><span class="st">'Correlation'</span>),</span>
-<span id="cb21-12"><a href="#cb21-12" aria-hidden="true" tabindex="-1"></a>    tooltip<span class="op">=</span>[alt.Tooltip(<span class="st">'var1:N'</span>, title<span class="op">=</span><span class="st">'Feature 1'</span>),</span>
-<span id="cb21-13"><a href="#cb21-13" aria-hidden="true" tabindex="-1"></a>             alt.Tooltip(<span class="st">'var2:N'</span>, title<span class="op">=</span><span class="st">'Feature 2'</span>),</span>
-<span id="cb21-14"><a href="#cb21-14" aria-hidden="true" tabindex="-1"></a>             alt.Tooltip(<span class="st">'corr:Q'</span>, title<span class="op">=</span><span class="st">'Correlation'</span>, <span class="bu">format</span><span class="op">=</span><span class="st">'.2f'</span>)]</span>
-<span id="cb21-15"><a href="#cb21-15" aria-hidden="true" tabindex="-1"></a>).properties(width<span class="op">=</span><span class="dv">480</span>, height<span class="op">=</span><span class="dv">480</span>)</span>
-<span id="cb21-16"><a href="#cb21-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-17"><a href="#cb21-17" aria-hidden="true" tabindex="-1"></a>labels <span class="op">=</span> alt.Chart(corr_long).mark_text(baseline<span class="op">=</span><span class="st">'middle'</span>, color<span class="op">=</span><span class="st">'black'</span>, size<span class="op">=</span><span class="dv">12</span>).encode(</span>
-<span id="cb21-18"><a href="#cb21-18" aria-hidden="true" tabindex="-1"></a>    x<span class="op">=</span>alt.X(<span class="st">'var1:N'</span>, sort<span class="op">=</span>numeric_cols),</span>
-<span id="cb21-19"><a href="#cb21-19" aria-hidden="true" tabindex="-1"></a>    y<span class="op">=</span>alt.Y(<span class="st">'var2:N'</span>, sort<span class="op">=</span><span class="bu">list</span>(<span class="bu">reversed</span>(numeric_cols))),</span>
-<span id="cb21-20"><a href="#cb21-20" aria-hidden="true" tabindex="-1"></a>    text<span class="op">=</span>alt.Text(<span class="st">'corr:Q'</span>, <span class="bu">format</span><span class="op">=</span><span class="st">'.2f'</span>)</span>
-<span id="cb21-21"><a href="#cb21-21" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb21-22"><a href="#cb21-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-23"><a href="#cb21-23" aria-hidden="true" tabindex="-1"></a>(heatmap <span class="op">+</span> labels).configure_axis(labelAngle<span class="op">=-</span><span class="dv">45</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-<div id="7fd6b059" class="cell" data-execution_count="22">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>alt.Chart(adult_df).mark_bar().encode(</span>
-<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>    alt.X(<span class="st">'income:N'</span>, title<span class="op">=</span><span class="st">'Income'</span>),</span>
-<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>    alt.Y(<span class="st">'count():Q'</span>, title<span class="op">=</span><span class="st">'Count'</span>), </span>
-<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>    color<span class="op">=</span><span class="st">'income:N'</span> </span>
-<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>).properties(</span>
-<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>    width<span class="op">=</span><span class="dv">400</span>, </span>
-<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>    height<span class="op">=</span><span class="dv">300</span>  </span>
-<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-<p><strong>Figure 1.</strong> Income class distribution (Altair bar chart). Counts for <code>&lt;=50K</code> vs <code>&gt;50K</code> show the class mix before modeling.</p>
-<section id="preprocessing-pipeline" class="level2">
-<h2 class="anchored" data-anchor-id="preprocessing-pipeline">Preprocessing pipeline</h2>
-<p>Set up a pipeline that imputes missing values, encodes categoricals (with ordered education), scales numerics, and applies the same steps to both train and test data.</p>
-<div id="96367e7f" class="cell" data-execution_count="23">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> train_test_split</span>
-<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.preprocessing <span class="im">import</span> OneHotEncoder, StandardScaler, OrdinalEncoder</span>
-<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.compose <span class="im">import</span> ColumnTransformer</span>
-<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.pipeline <span class="im">import</span> Pipeline</span>
-<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.impute <span class="im">import</span> SimpleImputer</span>
-<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Separate features and target using the pre-created train/test split</span></span>
-<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a>numeric_features <span class="op">=</span> [<span class="st">'age'</span>, <span class="st">'capital-gain'</span>, <span class="st">'capital-loss'</span>, <span class="st">'hours-per-week'</span>]</span>
-<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a>categorical_features <span class="op">=</span> [<span class="st">'workclass'</span>, <span class="st">'marital-status'</span>, <span class="st">'occupation'</span>, <span class="st">'relationship'</span>, <span class="st">'native-country'</span>]</span>
-<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a>ordinal_features <span class="op">=</span> [<span class="st">'education'</span>]</span>
-<span id="cb23-11"><a href="#cb23-11" aria-hidden="true" tabindex="-1"></a>binary_features <span class="op">=</span> [<span class="st">'sex'</span>]</span>
-<span id="cb23-12"><a href="#cb23-12" aria-hidden="true" tabindex="-1"></a>drop_features <span class="op">=</span> [<span class="st">'fnlwgt'</span>, <span class="st">'education-num'</span>, <span class="st">'race'</span>]</span>
-<span id="cb23-13"><a href="#cb23-13" aria-hidden="true" tabindex="-1"></a>target <span class="op">=</span> <span class="st">"income"</span></span>
-<span id="cb23-14"><a href="#cb23-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-15"><a href="#cb23-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Ordered levels for the education column (lowest to highest)</span></span>
-<span id="cb23-16"><a href="#cb23-16" aria-hidden="true" tabindex="-1"></a>education_order <span class="op">=</span> [</span>
-<span id="cb23-17"><a href="#cb23-17" aria-hidden="true" tabindex="-1"></a>    <span class="st">'dropout'</span>,</span>
-<span id="cb23-18"><a href="#cb23-18" aria-hidden="true" tabindex="-1"></a>    <span class="st">'HighGrad'</span>,</span>
-<span id="cb23-19"><a href="#cb23-19" aria-hidden="true" tabindex="-1"></a>    <span class="st">'CommunityCollege'</span>,</span>
-<span id="cb23-20"><a href="#cb23-20" aria-hidden="true" tabindex="-1"></a>    <span class="st">'Bachelors'</span>,</span>
-<span id="cb23-21"><a href="#cb23-21" aria-hidden="true" tabindex="-1"></a>    <span class="st">'Masters'</span>,</span>
-<span id="cb23-22"><a href="#cb23-22" aria-hidden="true" tabindex="-1"></a>    <span class="st">'Doctorate'</span>,</span>
-<span id="cb23-23"><a href="#cb23-23" aria-hidden="true" tabindex="-1"></a>]</span>
-<span id="cb23-24"><a href="#cb23-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-25"><a href="#cb23-25" aria-hidden="true" tabindex="-1"></a>X_train <span class="op">=</span> adult_df.drop(columns<span class="op">=</span>drop_features <span class="op">+</span> [target])</span>
-<span id="cb23-26"><a href="#cb23-26" aria-hidden="true" tabindex="-1"></a>X_test <span class="op">=</span> data_test.drop(columns<span class="op">=</span>drop_features <span class="op">+</span> [target])</span>
-<span id="cb23-27"><a href="#cb23-27" aria-hidden="true" tabindex="-1"></a>y_train <span class="op">=</span> adult_df[target]</span>
-<span id="cb23-28"><a href="#cb23-28" aria-hidden="true" tabindex="-1"></a>y_test <span class="op">=</span> data_test[target]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-</section>
-<section id="column-preprocessing" class="level2">
-<h2 class="anchored" data-anchor-id="column-preprocessing">Column preprocessing</h2>
-<p>List which columns are numeric, categorical, ordinal, binary, and which to drop. Set the target column, then build pipelines for each group before combining them.</p>
-<div id="a37cc8d5" class="cell" data-execution_count="24">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Pipelines for different data types</span></span>
-<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>categorical_pipeline <span class="op">=</span> Pipeline(steps<span class="op">=</span>[</span>
-<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>    (<span class="st">'imputer'</span>, SimpleImputer(strategy<span class="op">=</span><span class="st">'most_frequent'</span>)),</span>
-<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>    (<span class="st">'encoder'</span>, OneHotEncoder(handle_unknown<span class="op">=</span><span class="st">'ignore'</span>, sparse_output<span class="op">=</span><span class="va">False</span>))</span>
-<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>])</span>
-<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>ordinal_pipeline <span class="op">=</span> Pipeline(steps<span class="op">=</span>[</span>
-<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a>    (<span class="st">'imputer'</span>, SimpleImputer(strategy<span class="op">=</span><span class="st">'most_frequent'</span>)),</span>
-<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a>    (<span class="st">'encoder'</span>, OrdinalEncoder(categories<span class="op">=</span>[education_order], handle_unknown<span class="op">=</span><span class="st">'use_encoded_value'</span>, unknown_value<span class="op">=-</span><span class="dv">1</span>))</span>
-<span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a>])</span>
-<span id="cb24-11"><a href="#cb24-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-12"><a href="#cb24-12" aria-hidden="true" tabindex="-1"></a>binary_pipeline <span class="op">=</span> Pipeline(steps<span class="op">=</span>[</span>
-<span id="cb24-13"><a href="#cb24-13" aria-hidden="true" tabindex="-1"></a>    (<span class="st">'imputer'</span>, SimpleImputer(strategy<span class="op">=</span><span class="st">'most_frequent'</span>)),</span>
-<span id="cb24-14"><a href="#cb24-14" aria-hidden="true" tabindex="-1"></a>    (<span class="st">'encoder'</span>, OneHotEncoder(drop<span class="op">=</span><span class="st">'if_binary'</span>, handle_unknown<span class="op">=</span><span class="st">'ignore'</span>, sparse_output<span class="op">=</span><span class="va">False</span>))</span>
-<span id="cb24-15"><a href="#cb24-15" aria-hidden="true" tabindex="-1"></a>])</span>
-<span id="cb24-16"><a href="#cb24-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-17"><a href="#cb24-17" aria-hidden="true" tabindex="-1"></a>numeric_pipeline <span class="op">=</span> Pipeline(steps<span class="op">=</span>[</span>
-<span id="cb24-18"><a href="#cb24-18" aria-hidden="true" tabindex="-1"></a>    (<span class="st">'imputer'</span>, SimpleImputer(strategy<span class="op">=</span><span class="st">'median'</span>)),</span>
-<span id="cb24-19"><a href="#cb24-19" aria-hidden="true" tabindex="-1"></a>    (<span class="st">'scaler'</span>, StandardScaler())</span>
-<span id="cb24-20"><a href="#cb24-20" aria-hidden="true" tabindex="-1"></a>])</span>
-<span id="cb24-21"><a href="#cb24-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-22"><a href="#cb24-22" aria-hidden="true" tabindex="-1"></a>preprocessor <span class="op">=</span> ColumnTransformer(</span>
-<span id="cb24-23"><a href="#cb24-23" aria-hidden="true" tabindex="-1"></a>    transformers<span class="op">=</span>[</span>
-<span id="cb24-24"><a href="#cb24-24" aria-hidden="true" tabindex="-1"></a>        (<span class="st">'ordinal'</span>, ordinal_pipeline, ordinal_features),</span>
-<span id="cb24-25"><a href="#cb24-25" aria-hidden="true" tabindex="-1"></a>        (<span class="st">'binary'</span>, binary_pipeline, binary_features),</span>
-<span id="cb24-26"><a href="#cb24-26" aria-hidden="true" tabindex="-1"></a>        (<span class="st">'categorical'</span>, categorical_pipeline, categorical_features),</span>
-<span id="cb24-27"><a href="#cb24-27" aria-hidden="true" tabindex="-1"></a>        (<span class="st">'numeric'</span>, numeric_pipeline, numeric_features),</span>
-<span id="cb24-28"><a href="#cb24-28" aria-hidden="true" tabindex="-1"></a>    ]</span>
-<span id="cb24-29"><a href="#cb24-29" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb24-30"><a href="#cb24-30" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-31"><a href="#cb24-31" aria-hidden="true" tabindex="-1"></a>preprocessor</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-<p><strong>Preprocessing design.</strong> Numerics: median impute, then scale. Categoricals: most-frequent impute, then one-hot. Education: ordered encoder. Sex: binary one-hot. A <code>ColumnTransformer</code> applies the same steps to train and test.</p>
-<div id="2114b2f6" class="cell" data-execution_count="25">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co"># generate preprocessed training data just to check how it looks</span></span>
-<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>X_train_processed <span class="op">=</span> preprocessor.fit_transform(X_train)</span>
-<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a><span class="co"># get the feature names after preprocessing</span></span>
-<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> get_feature_names(preprocessor):</span>
-<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>    feature_names <span class="op">=</span> []</span>
-<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Ordinal features</span></span>
-<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a>    ordinal_features <span class="op">=</span> preprocessor.transformers_[<span class="dv">0</span>][<span class="dv">2</span>]</span>
-<span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a>    feature_names.extend(ordinal_features)</span>
-<span id="cb25-11"><a href="#cb25-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-12"><a href="#cb25-12" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Binary features</span></span>
-<span id="cb25-13"><a href="#cb25-13" aria-hidden="true" tabindex="-1"></a>    binary_features <span class="op">=</span> preprocessor.transformers_[<span class="dv">1</span>][<span class="dv">2</span>]</span>
-<span id="cb25-14"><a href="#cb25-14" aria-hidden="true" tabindex="-1"></a>    binary_encoder <span class="op">=</span> preprocessor.transformers_[<span class="dv">1</span>][<span class="dv">1</span>].named_steps[<span class="st">'encoder'</span>]</span>
-<span id="cb25-15"><a href="#cb25-15" aria-hidden="true" tabindex="-1"></a>    binary_feature_names <span class="op">=</span> binary_encoder.get_feature_names_out(binary_features)</span>
-<span id="cb25-16"><a href="#cb25-16" aria-hidden="true" tabindex="-1"></a>    feature_names.extend(binary_feature_names)</span>
-<span id="cb25-17"><a href="#cb25-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-18"><a href="#cb25-18" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Categorical features</span></span>
-<span id="cb25-19"><a href="#cb25-19" aria-hidden="true" tabindex="-1"></a>    categorical_features <span class="op">=</span> preprocessor.transformers_[<span class="dv">2</span>][<span class="dv">2</span>]</span>
-<span id="cb25-20"><a href="#cb25-20" aria-hidden="true" tabindex="-1"></a>    categorical_encoder <span class="op">=</span> preprocessor.transformers_[<span class="dv">2</span>][<span class="dv">1</span>].named_steps[<span class="st">'encoder'</span>]</span>
-<span id="cb25-21"><a href="#cb25-21" aria-hidden="true" tabindex="-1"></a>    categorical_feature_names <span class="op">=</span> categorical_encoder.get_feature_names_out(categorical_features)</span>
-<span id="cb25-22"><a href="#cb25-22" aria-hidden="true" tabindex="-1"></a>    feature_names.extend(categorical_feature_names)</span>
-<span id="cb25-23"><a href="#cb25-23" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-24"><a href="#cb25-24" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Numeric features</span></span>
-<span id="cb25-25"><a href="#cb25-25" aria-hidden="true" tabindex="-1"></a>    numeric_features <span class="op">=</span> preprocessor.transformers_[<span class="dv">3</span>][<span class="dv">2</span>]</span>
-<span id="cb25-26"><a href="#cb25-26" aria-hidden="true" tabindex="-1"></a>    feature_names.extend(numeric_features)</span>
-<span id="cb25-27"><a href="#cb25-27" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-28"><a href="#cb25-28" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> feature_names</span>
-<span id="cb25-29"><a href="#cb25-29" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-30"><a href="#cb25-30" aria-hidden="true" tabindex="-1"></a>feature_names <span class="op">=</span> get_feature_names(preprocessor)</span>
-<span id="cb25-31"><a href="#cb25-31" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-32"><a href="#cb25-32" aria-hidden="true" tabindex="-1"></a><span class="co"># convert processed data back to DataFrame for better readability</span></span>
-<span id="cb25-33"><a href="#cb25-33" aria-hidden="true" tabindex="-1"></a>X_train_processed_df <span class="op">=</span> pd.DataFrame(X_train_processed, columns<span class="op">=</span>feature_names)</span>
-<span id="cb25-34"><a href="#cb25-34" aria-hidden="true" tabindex="-1"></a>X_train_processed_df.head()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-<section id="baseline-and-model-comparison" class="level3">
-<h3 class="anchored" data-anchor-id="baseline-and-model-comparison">Baseline and model comparison</h3>
-<p>Start with a dummy classifier, then compare tree, kNN, SVM, GaussianNB, and Logistic Regression using the shared preprocessing to see which models look promising.</p>
-<div id="e3c6622e" class="cell" data-execution_count="26">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.dummy <span class="im">import</span> DummyClassifier</span>
-<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.tree <span class="im">import</span> DecisionTreeClassifier</span>
-<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.neighbors <span class="im">import</span> KNeighborsClassifier</span>
-<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.svm <span class="im">import</span> SVC</span>
-<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.naive_bayes <span class="im">import</span> GaussianNB</span>
-<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.linear_model <span class="im">import</span> LogisticRegression</span>
-<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> cross_validate</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-<div id="0831d687" class="cell" data-execution_count="27">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Code adapted from MDS 571 course materials</span></span>
-<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> mean_std_cross_val_scores(model, X_train, y_train, <span class="op">**</span>kwargs):</span>
-<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
-<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a><span class="co">    Returns mean and std of cross validation</span></span>
-<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a><span class="co">    Parameters</span></span>
-<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a><span class="co">    ----------</span></span>
-<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a><span class="co">    model :</span></span>
-<span id="cb27-9"><a href="#cb27-9" aria-hidden="true" tabindex="-1"></a><span class="co">        scikit-learn model</span></span>
-<span id="cb27-10"><a href="#cb27-10" aria-hidden="true" tabindex="-1"></a><span class="co">    X_train : numpy array or pandas DataFrame</span></span>
-<span id="cb27-11"><a href="#cb27-11" aria-hidden="true" tabindex="-1"></a><span class="co">        X in the training data</span></span>
-<span id="cb27-12"><a href="#cb27-12" aria-hidden="true" tabindex="-1"></a><span class="co">    y_train :</span></span>
-<span id="cb27-13"><a href="#cb27-13" aria-hidden="true" tabindex="-1"></a><span class="co">        y in the training data</span></span>
-<span id="cb27-14"><a href="#cb27-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-15"><a href="#cb27-15" aria-hidden="true" tabindex="-1"></a><span class="co">    Returns</span></span>
-<span id="cb27-16"><a href="#cb27-16" aria-hidden="true" tabindex="-1"></a><span class="co">    ----------</span></span>
-<span id="cb27-17"><a href="#cb27-17" aria-hidden="true" tabindex="-1"></a><span class="co">        pandas Series with mean scores from cross_validation</span></span>
-<span id="cb27-18"><a href="#cb27-18" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
-<span id="cb27-19"><a href="#cb27-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-20"><a href="#cb27-20" aria-hidden="true" tabindex="-1"></a>    scores <span class="op">=</span> cross_validate(model, X_train, y_train, <span class="op">**</span>kwargs)</span>
-<span id="cb27-21"><a href="#cb27-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-22"><a href="#cb27-22" aria-hidden="true" tabindex="-1"></a>    mean_scores <span class="op">=</span> pd.DataFrame(scores).mean()</span>
-<span id="cb27-23"><a href="#cb27-23" aria-hidden="true" tabindex="-1"></a>    std_scores <span class="op">=</span> pd.DataFrame(scores).std()</span>
-<span id="cb27-24"><a href="#cb27-24" aria-hidden="true" tabindex="-1"></a>    out_col <span class="op">=</span> []</span>
-<span id="cb27-25"><a href="#cb27-25" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-26"><a href="#cb27-26" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">len</span>(mean_scores)):</span>
-<span id="cb27-27"><a href="#cb27-27" aria-hidden="true" tabindex="-1"></a>        out_col.append((<span class="ss">f"%0.3f (+/- %0.3f)"</span> <span class="op">%</span> (mean_scores.iloc[i], std_scores.iloc[i])))</span>
-<span id="cb27-28"><a href="#cb27-28" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-29"><a href="#cb27-29" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> pd.Series(data<span class="op">=</span>out_col, index<span class="op">=</span>mean_scores.index)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-<div id="4c81eead" class="cell" data-execution_count="28">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>models <span class="op">=</span> {</span>
-<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">'Dummy-most_frequent'</span>: Pipeline([</span>
-<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>        (<span class="st">'preprocess'</span>, preprocessor),</span>
-<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>        (<span class="st">'classifier'</span>, DummyClassifier(strategy<span class="op">=</span><span class="st">'most_frequent'</span>))</span>
-<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a>    ]),</span>
-<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">'DecisionTree'</span>: Pipeline([</span>
-<span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a>        (<span class="st">'preprocess'</span>, preprocessor),</span>
-<span id="cb28-8"><a href="#cb28-8" aria-hidden="true" tabindex="-1"></a>        (<span class="st">'classifier'</span>, DecisionTreeClassifier(random_state<span class="op">=</span><span class="dv">42</span>))</span>
-<span id="cb28-9"><a href="#cb28-9" aria-hidden="true" tabindex="-1"></a>    ]),</span>
-<span id="cb28-10"><a href="#cb28-10" aria-hidden="true" tabindex="-1"></a>    <span class="st">'KNN'</span>: Pipeline([</span>
-<span id="cb28-11"><a href="#cb28-11" aria-hidden="true" tabindex="-1"></a>        (<span class="st">'preprocess'</span>, preprocessor),</span>
-<span id="cb28-12"><a href="#cb28-12" aria-hidden="true" tabindex="-1"></a>        (<span class="st">'classifier'</span>, KNeighborsClassifier())</span>
-<span id="cb28-13"><a href="#cb28-13" aria-hidden="true" tabindex="-1"></a>    ]),</span>
-<span id="cb28-14"><a href="#cb28-14" aria-hidden="true" tabindex="-1"></a>    <span class="st">'SVM-RBF'</span>: Pipeline([</span>
-<span id="cb28-15"><a href="#cb28-15" aria-hidden="true" tabindex="-1"></a>        (<span class="st">'preprocess'</span>, preprocessor),</span>
-<span id="cb28-16"><a href="#cb28-16" aria-hidden="true" tabindex="-1"></a>        (<span class="st">'classifier'</span>, SVC(kernel<span class="op">=</span><span class="st">'rbf'</span>))</span>
-<span id="cb28-17"><a href="#cb28-17" aria-hidden="true" tabindex="-1"></a>    ]),</span>
-<span id="cb28-18"><a href="#cb28-18" aria-hidden="true" tabindex="-1"></a>    <span class="st">'LogisticRegression'</span>: Pipeline([</span>
-<span id="cb28-19"><a href="#cb28-19" aria-hidden="true" tabindex="-1"></a>        (<span class="st">'preprocess'</span>, preprocessor),</span>
-<span id="cb28-20"><a href="#cb28-20" aria-hidden="true" tabindex="-1"></a>        (<span class="st">'classifier'</span>, LogisticRegression(max_iter<span class="op">=</span><span class="dv">200</span>))</span>
-<span id="cb28-21"><a href="#cb28-21" aria-hidden="true" tabindex="-1"></a>    ]),</span>
-<span id="cb28-22"><a href="#cb28-22" aria-hidden="true" tabindex="-1"></a>    <span class="st">'GaussianNB'</span>: Pipeline([</span>
-<span id="cb28-23"><a href="#cb28-23" aria-hidden="true" tabindex="-1"></a>        (<span class="st">'preprocess'</span>, preprocessor),</span>
-<span id="cb28-24"><a href="#cb28-24" aria-hidden="true" tabindex="-1"></a>        (<span class="st">'classifier'</span>, GaussianNB())</span>
-<span id="cb28-25"><a href="#cb28-25" aria-hidden="true" tabindex="-1"></a>    ]),</span>
-<span id="cb28-26"><a href="#cb28-26" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb28-27"><a href="#cb28-27" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb28-28"><a href="#cb28-28" aria-hidden="true" tabindex="-1"></a>cv_results <span class="op">=</span> {}</span>
-<span id="cb28-29"><a href="#cb28-29" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> name, model <span class="kw">in</span> models.items():</span>
-<span id="cb28-30"><a href="#cb28-30" aria-hidden="true" tabindex="-1"></a>    cv_results[name] <span class="op">=</span> mean_std_cross_val_scores(</span>
-<span id="cb28-31"><a href="#cb28-31" aria-hidden="true" tabindex="-1"></a>        model, X_train, y_train, cv<span class="op">=</span><span class="dv">5</span>, return_train_score<span class="op">=</span><span class="va">True</span></span>
-<span id="cb28-32"><a href="#cb28-32" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb28-33"><a href="#cb28-33" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb28-34"><a href="#cb28-34" aria-hidden="true" tabindex="-1"></a>cv_summary <span class="op">=</span> pd.DataFrame(cv_results).T</span>
-<span id="cb28-35"><a href="#cb28-35" aria-hidden="true" tabindex="-1"></a>cv_summary</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-<p>The best perfoming models are Logistic Regression and RBF-SVM, so we tune hyperparameters for those next.</p>
-</section>
-<section id="hyperparameter-tuning-for-top-models" class="level3">
-<h3 class="anchored" data-anchor-id="hyperparameter-tuning-for-top-models">Hyperparameter tuning for top models</h3>
-<p>Run randomized search for Logistic Regression (C) and RBF-SVM (C, gamma) with the same preprocessing. Use cross-validated accuracy to pick the settings.</p>
-<div id="1ba54675" class="cell" data-execution_count="29">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> RandomizedSearchCV</span>
-<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.stats <span class="im">import</span> loguniform</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-<div id="847fcee9" class="cell" data-execution_count="30">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>log_reg_pipe <span class="op">=</span> Pipeline(steps<span class="op">=</span>[</span>
-<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>    (<span class="st">'preprocess'</span>, preprocessor),</span>
-<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>    (<span class="st">'classifier'</span>, LogisticRegression(max_iter<span class="op">=</span><span class="dv">500</span>, random_state<span class="op">=</span><span class="dv">42</span>))</span>
-<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a>])</span>
-<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a>log_reg_params <span class="op">=</span> {</span>
-<span id="cb30-7"><a href="#cb30-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">'classifier__C'</span>: loguniform(<span class="fl">1e-3</span>, <span class="fl">1e3</span>),</span>
-<span id="cb30-8"><a href="#cb30-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">'classifier__penalty'</span>: [<span class="st">'l2'</span>],</span>
-<span id="cb30-9"><a href="#cb30-9" aria-hidden="true" tabindex="-1"></a>    <span class="st">'classifier__solver'</span>: [<span class="st">'lbfgs'</span>],</span>
-<span id="cb30-10"><a href="#cb30-10" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb30-11"><a href="#cb30-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-12"><a href="#cb30-12" aria-hidden="true" tabindex="-1"></a>log_reg_search <span class="op">=</span> RandomizedSearchCV(</span>
-<span id="cb30-13"><a href="#cb30-13" aria-hidden="true" tabindex="-1"></a>    log_reg_pipe,</span>
-<span id="cb30-14"><a href="#cb30-14" aria-hidden="true" tabindex="-1"></a>    param_distributions<span class="op">=</span>log_reg_params,</span>
-<span id="cb30-15"><a href="#cb30-15" aria-hidden="true" tabindex="-1"></a>    n_iter<span class="op">=</span><span class="dv">200</span>,</span>
-<span id="cb30-16"><a href="#cb30-16" aria-hidden="true" tabindex="-1"></a>    cv<span class="op">=</span><span class="dv">3</span>,</span>
-<span id="cb30-17"><a href="#cb30-17" aria-hidden="true" tabindex="-1"></a>    scoring<span class="op">=</span><span class="st">'accuracy'</span>,</span>
-<span id="cb30-18"><a href="#cb30-18" aria-hidden="true" tabindex="-1"></a>    random_state<span class="op">=</span><span class="dv">42</span>,</span>
-<span id="cb30-19"><a href="#cb30-19" aria-hidden="true" tabindex="-1"></a>    n_jobs<span class="op">=</span><span class="dv">1</span>,</span>
-<span id="cb30-20"><a href="#cb30-20" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb30-21"><a href="#cb30-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-22"><a href="#cb30-22" aria-hidden="true" tabindex="-1"></a>log_reg_search.fit(X_train, y_train)</span>
-<span id="cb30-23"><a href="#cb30-23" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-24"><a href="#cb30-24" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Best Logistic Regression CV accuracy: </span><span class="sc">{</span>log_reg_search<span class="sc">.</span>best_score_<span class="sc">:.3f}</span><span class="ss">"</span>)</span>
-<span id="cb30-25"><a href="#cb30-25" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Best params:"</span>, log_reg_search.best_params_)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-<p>Tuning only moved accuracy a little, so expect small gains and keep track of the chosen parameters.</p>
-<div id="afe15567" class="cell" data-execution_count="31">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>svm_pipe <span class="op">=</span> Pipeline(steps<span class="op">=</span>[</span>
-<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>    (<span class="st">'preprocess'</span>, preprocessor),</span>
-<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>    (<span class="st">'classifier'</span>, SVC(kernel<span class="op">=</span><span class="st">'rbf'</span>, random_state<span class="op">=</span><span class="dv">42</span>))</span>
-<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>])</span>
-<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a>svm_params <span class="op">=</span> {</span>
-<span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">'classifier__C'</span>: loguniform(<span class="fl">1e-2</span>, <span class="fl">1e2</span>),</span>
-<span id="cb31-8"><a href="#cb31-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">'classifier__gamma'</span>: loguniform(<span class="fl">1e-4</span>, <span class="fl">1e0</span>),</span>
-<span id="cb31-9"><a href="#cb31-9" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb31-10"><a href="#cb31-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb31-11"><a href="#cb31-11" aria-hidden="true" tabindex="-1"></a>svm_search <span class="op">=</span> RandomizedSearchCV(</span>
-<span id="cb31-12"><a href="#cb31-12" aria-hidden="true" tabindex="-1"></a>    svm_pipe,</span>
-<span id="cb31-13"><a href="#cb31-13" aria-hidden="true" tabindex="-1"></a>    param_distributions<span class="op">=</span>svm_params,</span>
-<span id="cb31-14"><a href="#cb31-14" aria-hidden="true" tabindex="-1"></a>    n_iter<span class="op">=</span><span class="dv">20</span>,</span>
-<span id="cb31-15"><a href="#cb31-15" aria-hidden="true" tabindex="-1"></a>    cv<span class="op">=</span><span class="dv">3</span>,</span>
-<span id="cb31-16"><a href="#cb31-16" aria-hidden="true" tabindex="-1"></a>    scoring<span class="op">=</span><span class="st">'accuracy'</span>,</span>
-<span id="cb31-17"><a href="#cb31-17" aria-hidden="true" tabindex="-1"></a>    random_state<span class="op">=</span><span class="dv">42</span>,</span>
-<span id="cb31-18"><a href="#cb31-18" aria-hidden="true" tabindex="-1"></a>    n_jobs<span class="op">=</span><span class="dv">1</span>,</span>
-<span id="cb31-19"><a href="#cb31-19" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb31-20"><a href="#cb31-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb31-21"><a href="#cb31-21" aria-hidden="true" tabindex="-1"></a>svm_search.fit(X_train, y_train)</span>
-<span id="cb31-22"><a href="#cb31-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb31-23"><a href="#cb31-23" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Best SVM (RBF) CV accuracy: </span><span class="sc">{</span>svm_search<span class="sc">.</span>best_score_<span class="sc">:.3f}</span><span class="ss">"</span>)</span>
-<span id="cb31-24"><a href="#cb31-24" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Best params:"</span>, svm_search.best_params_)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-</section>
-<section id="test-set-evaluation" class="level3">
-<h3 class="anchored" data-anchor-id="test-set-evaluation">Test set evaluation</h3>
-<p>Score the tuned Logistic Regression and RBF-SVM on the held-out test set to report how well they generalize.</p>
-<div id="6e6dc138" class="cell" data-execution_count="32">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb32"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Use tuned models when available; otherwise fall back to the quick baseline fits</span></span>
-<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>best_log_reg <span class="op">=</span> log_reg_search.best_estimator_</span>
-<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>log_reg_name <span class="op">=</span> <span class="st">"Tuned Logistic Regression"</span></span>
-<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a>best_svm <span class="op">=</span> svm_search.best_estimator_</span>
-<span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a>svm_name <span class="op">=</span> <span class="st">"Tuned RBF-SVM"</span></span>
-<span id="cb32-7"><a href="#cb32-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-8"><a href="#cb32-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-9"><a href="#cb32-9" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> name, model <span class="kw">in</span> [</span>
-<span id="cb32-10"><a href="#cb32-10" aria-hidden="true" tabindex="-1"></a>    (log_reg_name, best_log_reg),</span>
-<span id="cb32-11"><a href="#cb32-11" aria-hidden="true" tabindex="-1"></a>    (svm_name, best_svm),</span>
-<span id="cb32-12"><a href="#cb32-12" aria-hidden="true" tabindex="-1"></a>]:</span>
-<span id="cb32-13"><a href="#cb32-13" aria-hidden="true" tabindex="-1"></a>    test_acc <span class="op">=</span> model.score(X_test, y_test)</span>
-<span id="cb32-14"><a href="#cb32-14" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"</span><span class="sc">{</span>name<span class="sc">}</span><span class="ss"> test accuracy: </span><span class="sc">{</span>test_acc<span class="sc">:.3f}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-</section>
+<p>Here in <a href="#fig-corr-heatmap" class="quarto-xref">Figure&nbsp;2</a>, we see that there are no strong correlations between any pair of features, showing that there might not be collinearity issues.</p>
 <section id="model-comparison-and-interpretation" class="level3">
 <h3 class="anchored" data-anchor-id="model-comparison-and-interpretation">Model comparison and interpretation</h3>
-<p>RBF-SVM is a bit more accurate but harder to explain. Logistic Regression is close in accuracy and its coefficients and odds ratios make feature effects clear. Use LR when you need explanations; use SVM if you want the tiny accuracy edge.</p>
-</section>
-</section>
-<section id="logistic-regression-interpretation" class="level2">
-<h2 class="anchored" data-anchor-id="logistic-regression-interpretation">Logistic Regression interpretation</h2>
-<p>Lets use Logistic Regression coefficients to rank features.</p>
-<div id="231589ec" class="cell" data-execution_count="33">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb33"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
-<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a>log_reg_clf <span class="op">=</span> best_log_reg.named_steps[<span class="st">'classifier'</span>]</span>
-<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a>feature_names <span class="op">=</span> best_log_reg.named_steps[<span class="st">'preprocess'</span>].get_feature_names_out()</span>
-<span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a>coefs <span class="op">=</span> log_reg_clf.coef_[<span class="dv">0</span>]</span>
-<span id="cb33-7"><a href="#cb33-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-8"><a href="#cb33-8" aria-hidden="true" tabindex="-1"></a>coef_df <span class="op">=</span> pd.DataFrame({</span>
-<span id="cb33-9"><a href="#cb33-9" aria-hidden="true" tabindex="-1"></a>    <span class="st">'feature'</span>: feature_names,</span>
-<span id="cb33-10"><a href="#cb33-10" aria-hidden="true" tabindex="-1"></a>    <span class="st">'coefficient'</span>: coefs,</span>
-<span id="cb33-11"><a href="#cb33-11" aria-hidden="true" tabindex="-1"></a>    <span class="st">'odds_ratio'</span>: np.exp(coefs)</span>
-<span id="cb33-12"><a href="#cb33-12" aria-hidden="true" tabindex="-1"></a>})</span>
-<span id="cb33-13"><a href="#cb33-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-14"><a href="#cb33-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Strongest positive and negative signals</span></span>
-<span id="cb33-15"><a href="#cb33-15" aria-hidden="true" tabindex="-1"></a>top_positive <span class="op">=</span> coef_df.sort_values(<span class="st">'coefficient'</span>, ascending<span class="op">=</span><span class="va">False</span>).head(<span class="dv">10</span>)</span>
-<span id="cb33-16"><a href="#cb33-16" aria-hidden="true" tabindex="-1"></a>top_negative <span class="op">=</span> coef_df.sort_values(<span class="st">'coefficient'</span>).head(<span class="dv">10</span>)</span>
-<span id="cb33-17"><a href="#cb33-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-18"><a href="#cb33-18" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Top positive predictors (increase odds of &gt;50K):"</span>)</span>
-<span id="cb33-19"><a href="#cb33-19" aria-hidden="true" tabindex="-1"></a>display(top_positive)</span>
-<span id="cb33-20"><a href="#cb33-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-21"><a href="#cb33-21" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Top negative predictors (decrease odds of &gt;50K):"</span>)</span>
-<span id="cb33-22"><a href="#cb33-22" aria-hidden="true" tabindex="-1"></a>display(top_negative)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell" data-execution_count="3">
+<div id="tbl-cv-summary" class="cell quarto-float quarto-figure quarto-figure-center anchored" data-execution_count="3">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-cv-summary-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;1: Cross validation summary for different models.
+</figcaption>
+<div aria-describedby="tbl-cv-summary-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output cell-output-display cell-output-markdown" data-execution_count="9">
+<table class="do-not-create-environment cell caption-top table table-sm table-striped small">
+<colgroup>
+<col style="width: 14%">
+<col style="width: 15%">
+<col style="width: 15%">
+<col style="width: 15%">
+<col style="width: 14%">
+<col style="width: 11%">
+<col style="width: 13%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">model</th>
+<th style="text-align: right;">train_accuracy_mean</th>
+<th style="text-align: right;">train_accuracy_std</th>
+<th style="text-align: right;">test_accuracy_mean</th>
+<th style="text-align: right;">test_accuracy_std</th>
+<th style="text-align: right;">fit_time_mean</th>
+<th style="text-align: right;">score_time_mean</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">SVM-RBF</td>
+<td style="text-align: right;">0.866247</td>
+<td style="text-align: right;">0.00147473</td>
+<td style="text-align: right;">0.855037</td>
+<td style="text-align: right;">0.00667547</td>
+<td style="text-align: right;">0.586047</td>
+<td style="text-align: right;">0.309393</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">LogisticRegression</td>
+<td style="text-align: right;">0.851454</td>
+<td style="text-align: right;">0.00191879</td>
+<td style="text-align: right;">0.849304</td>
+<td style="text-align: right;">0.0078078</td>
+<td style="text-align: right;">0.0400904</td>
+<td style="text-align: right;">0.00131488</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">KNN</td>
+<td style="text-align: right;">0.88232</td>
+<td style="text-align: right;">0.00180596</td>
+<td style="text-align: right;">0.834049</td>
+<td style="text-align: right;">0.00638451</td>
+<td style="text-align: right;">0.00424371</td>
+<td style="text-align: right;">0.0638126</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">DecisionTree</td>
+<td style="text-align: right;">0.985437</td>
+<td style="text-align: right;">0.000514588</td>
+<td style="text-align: right;">0.814189</td>
+<td style="text-align: right;">0.0045412</td>
+<td style="text-align: right;">0.0195274</td>
+<td style="text-align: right;">0.00144496</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Dummy-most_frequent</td>
+<td style="text-align: right;">0.760749</td>
+<td style="text-align: right;">5.3867e-05</td>
+<td style="text-align: right;">0.760749</td>
+<td style="text-align: right;">0.000215433</td>
+<td style="text-align: right;">0.00200963</td>
+<td style="text-align: right;">0.000862169</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">GaussianNB</td>
+<td style="text-align: right;">0.309787</td>
+<td style="text-align: right;">0.00417648</td>
+<td style="text-align: right;">0.308148</td>
+<td style="text-align: right;">0.0104979</td>
+<td style="text-align: right;">0.00577421</td>
+<td style="text-align: right;">0.00150285</td>
+</tr>
+</tbody>
+</table>
 </div>
+</div>
+</figure>
+</div>
+</div>
+<p>From <a href="#tbl-cv-summary" class="quarto-xref">Table&nbsp;1</a>, we can see RBF-SVM is a bit more accurate. Logistic Regression is close in accuracy, and its interpretability is better with its coefficients and odds ratios. So use LR when you need explanations; use SVM if you want the tiny accuracy edge.</p>
+</section>
 <section id="visual-checks-for-interpretability" class="level3">
 <h3 class="anchored" data-anchor-id="visual-checks-for-interpretability">Visual checks for interpretability</h3>
-<p>Altair bars show the strongest positive and negative LR coefficients (Figure 2). Binned probability curves show average P(<code>&gt;50K</code>) across deciles for <code>hours-per-week</code>, <code>capital-gain</code>, and <code>age</code> with 10th/90th percentile bands (Figure 3).</p>
-<div id="4600faf7" class="cell" data-execution_count="34">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb34"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> altair <span class="im">as</span> alt</span>
-<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
-<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Altair bars for top coefficients</span></span>
-<span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a>pos_chart <span class="op">=</span> (</span>
-<span id="cb34-6"><a href="#cb34-6" aria-hidden="true" tabindex="-1"></a>    alt.Chart(top_positive)</span>
-<span id="cb34-7"><a href="#cb34-7" aria-hidden="true" tabindex="-1"></a>    .mark_bar(color<span class="op">=</span><span class="st">'seagreen'</span>)</span>
-<span id="cb34-8"><a href="#cb34-8" aria-hidden="true" tabindex="-1"></a>    .encode(</span>
-<span id="cb34-9"><a href="#cb34-9" aria-hidden="true" tabindex="-1"></a>        y<span class="op">=</span>alt.Y(<span class="st">'feature:N'</span>, sort<span class="op">=</span><span class="bu">list</span>(top_positive[<span class="st">'feature'</span>][::<span class="op">-</span><span class="dv">1</span>]), title<span class="op">=</span><span class="st">'Feature'</span>),</span>
-<span id="cb34-10"><a href="#cb34-10" aria-hidden="true" tabindex="-1"></a>        x<span class="op">=</span>alt.X(<span class="st">'coefficient:Q'</span>, title<span class="op">=</span><span class="st">'Coefficient (log-odds)'</span>),</span>
-<span id="cb34-11"><a href="#cb34-11" aria-hidden="true" tabindex="-1"></a>        tooltip<span class="op">=</span>[<span class="st">'feature'</span>, <span class="st">'coefficient'</span>, <span class="st">'odds_ratio'</span>]</span>
-<span id="cb34-12"><a href="#cb34-12" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb34-13"><a href="#cb34-13" aria-hidden="true" tabindex="-1"></a>    .properties(title<span class="op">=</span><span class="st">'Top positive coefficients'</span>, width<span class="op">=</span><span class="dv">280</span>, height<span class="op">=</span><span class="dv">230</span>)</span>
-<span id="cb34-14"><a href="#cb34-14" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb34-15"><a href="#cb34-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb34-16"><a href="#cb34-16" aria-hidden="true" tabindex="-1"></a>neg_chart <span class="op">=</span> (</span>
-<span id="cb34-17"><a href="#cb34-17" aria-hidden="true" tabindex="-1"></a>    alt.Chart(top_negative)</span>
-<span id="cb34-18"><a href="#cb34-18" aria-hidden="true" tabindex="-1"></a>    .mark_bar(color<span class="op">=</span><span class="st">'firebrick'</span>)</span>
-<span id="cb34-19"><a href="#cb34-19" aria-hidden="true" tabindex="-1"></a>    .encode(</span>
-<span id="cb34-20"><a href="#cb34-20" aria-hidden="true" tabindex="-1"></a>        y<span class="op">=</span>alt.Y(<span class="st">'feature:N'</span>, sort<span class="op">=</span><span class="bu">list</span>(top_negative[<span class="st">'feature'</span>][::<span class="op">-</span><span class="dv">1</span>]), title<span class="op">=</span><span class="st">'Feature'</span>),</span>
-<span id="cb34-21"><a href="#cb34-21" aria-hidden="true" tabindex="-1"></a>        x<span class="op">=</span>alt.X(<span class="st">'coefficient:Q'</span>, title<span class="op">=</span><span class="st">'Coefficient (log-odds)'</span>),</span>
-<span id="cb34-22"><a href="#cb34-22" aria-hidden="true" tabindex="-1"></a>        tooltip<span class="op">=</span>[<span class="st">'feature'</span>, <span class="st">'coefficient'</span>, <span class="st">'odds_ratio'</span>]</span>
-<span id="cb34-23"><a href="#cb34-23" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb34-24"><a href="#cb34-24" aria-hidden="true" tabindex="-1"></a>    .properties(title<span class="op">=</span><span class="st">'Top negative coefficients'</span>, width<span class="op">=</span><span class="dv">280</span>, height<span class="op">=</span><span class="dv">230</span>)</span>
-<span id="cb34-25"><a href="#cb34-25" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb34-26"><a href="#cb34-26" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb34-27"><a href="#cb34-27" aria-hidden="true" tabindex="-1"></a>(pos_chart <span class="op">|</span> neg_chart)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="fig-logreg-coef" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-logreg-coef-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="../artifacts/figures/log_reg_coefficients.png" class="img-fluid figure-img" style="width:80.0%">
 </div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-logreg-coef-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;3: Top Postive and Negative Logistic Regression Coefficients.
+</figcaption>
+</figure>
+</div>
+<p><a href="#fig-logreg-coef" class="quarto-xref">Figure&nbsp;3</a> show the strongest positive and negative LR coefficients.</p>
 </section>
 <section id="results-and-discussion" class="level3">
 <h3 class="anchored" data-anchor-id="results-and-discussion">Results and Discussion</h3>
-<p>From the analyses above, we discovered that logistic regression and SVM RBF are the best classification models for predicting income, among all the other classification algorithms. The Logistic Regression test achieves test accuracy of <span class="math inline">\(0.848\)</span> and the RBF-SVM achieves test accuracy of <span class="math inline">\(0.855\)</span>. This is somewhat surprising because logistic regression is a baseline model for classifications.</p>
+<p>From the analyses above, we discovered that logistic regression and SVM RBF are the best classification models for predicting income, among all the other classification algorithms. The Logistic Regression achieves validation accuracy of 0.849 and the RBF-SVM achieves validation accuracy of 0.855. This is somewhat surprising because logistic regression is a baseline model for classifications.</p>
 <p>From the logistic regression coefficients, we find that key features include capital gains, occupations, native countries, and relationships, are especially related to determining income levels.</p>
 <p>For our next step, we should potentially prune some other irrelevant features to reduce noise in the models and achieve a better result. We can achieve this analyzing Pearson and Kendall correlation coefficients, PCA, or factor analysis (<span class="citation" data-cites="adhithya2025income">Laxman (<a href="#ref-adhithya2025income" role="doc-biblioref">2024</a>)</span>). Other ideas include grouping rare country categories to make the model steadier and easier to explain.</p>
-</section>
 </section>
 <section id="references" class="level2 unnumbered">
 
