@@ -32,5 +32,3 @@ def main(input_dir, train_out_dir, test_out_dir):
 
 if __name__ == '__main__':
     main()
-
-
