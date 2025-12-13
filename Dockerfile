@@ -2,11 +2,11 @@
 FROM condaforge/miniforge3:latest
 
 # copy the lockfile into the container
-COPY conda-lock.yml conda-lock.yml
+COPY conda-linux-64.lock conda-linux-64.lock
 
 # setup conda-lock and install packages from lockfile
 RUN conda install -n base -c conda-forge conda-lock jupyterlab nb_conda_kernels -y
-RUN conda run -n base conda-lock install -n 522-milestone conda-lock.yml
+RUN conda run -n base conda-lock install -n 522-milestone conda-linux-64.lock
 
 # Install system utilities (Make, Curl, etc.)
 RUN apt-get update \

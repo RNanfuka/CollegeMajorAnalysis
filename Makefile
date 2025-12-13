@@ -125,6 +125,9 @@ analysis: ## Run full Python pipeline (no Quarto)
 cl: ## Create conda-lock for multiple platforms
 	conda-lock lock --file environment.yml -p linux-64 -p osx-64 -p osx-arm64 -p win-64
 
+cl-linux: ## Create conda-lock for linux-64 only
+	conda-lock lock --file environment.yml -p linux-64 --lockfile conda-linux-64.lock
+
 env: ## Recreate conda environment from lock file
 	conda env remove -n 522-milestone -y || true
 	conda-lock install -n 522-milestone conda-lock.yml
