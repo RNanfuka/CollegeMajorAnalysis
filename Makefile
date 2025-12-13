@@ -123,7 +123,7 @@ analysis: ## Run full Python pipeline (no Quarto)
 # --- docker / env targets ---
 
 cl: ## Create conda-lock for multiple platforms
-	conda-lock lock --file environment.yml -p linux-64 -p osx-64 -p osx-arm64 -p win-64 -p linux-aarch64
+	conda-lock lock --file environment.yml -p linux-64 -p osx-64 -p osx-arm64 -p win-64
 
 env: ## Recreate conda environment from lock file
 	conda env remove -n 522-milestone -y || true

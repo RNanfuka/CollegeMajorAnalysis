@@ -13,13 +13,6 @@ RUN apt-get update \
     && apt-get install -y --no-install-recommends make curl \
     && rm -rf /var/lib/apt/lists/*
 
-# Download and install Quarto matching the container architecture (amd64/arm64)
-ARG QUARTO_VERSION=1.8.26
-RUN ARCH="$(dpkg --print-architecture)" \
-    && curl -LO "https://github.com/quarto-dev/quarto-cli/releases/download/v${QUARTO_VERSION}/quarto-${QUARTO_VERSION}-linux-${ARCH}.deb" \
-    && dpkg -i "quarto-${QUARTO_VERSION}-linux-${ARCH}.deb" \
-    && rm "quarto-${QUARTO_VERSION}-linux-${ARCH}.deb"
-
 # Expose ports
 EXPOSE 8888 
 EXPOSE 8889
@@ -34,6 +27,8 @@ RUN echo 'eval "$(/opt/conda/bin/conda shell.bash hook)"' >> ~/.bashrc
 # Options: "jupyter" OR "quarto"
 ENV SERVICE=jupyter
 
+RUN conda run -n 522-milestone quarto --version
+
 # Script that chooses which service to run
 # (Installed into the container as /entrypoint.sh)
 RUN printf '%s\n' \
@@ -42,7 +37,7 @@ RUN printf '%s\n' \
 'eval "$(/opt/conda/bin/conda shell.bash hook)"' \
 'if [ "$SERVICE" = "quarto" ]; then' \
 '  echo "🚀 Starting Quarto preview on port 8889..."' \
-'  quarto preview --port 8889 --host 0.0.0.0 --no-browser' \
+'  conda run --no-capture-output -n 522-milestone quarto preview --port 8889 --host 0.0.0.0 --no-browser' \
 'else' \
 '  echo "🚀 Starting JupyterLab on port 8888..."' \
 '  conda run --no-capture-output -n 522-milestone jupyter lab --ip=0.0.0.0 --port=8888 --no-browser --allow-root --IdentityProvider.token= --ServerApp.password=' \
