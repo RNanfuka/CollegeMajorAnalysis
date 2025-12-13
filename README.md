@@ -43,19 +43,19 @@ conda activate 522-milestone
 5) Run the pipeline from that JupyterLab terminal  
 **All steps at once:**
 ```bash
-make run-all-py
+make docs/index.html
 ```
-This downloads data, cleans/splits it, runs validations/EDA, trains models (with HPO), and regenerates artifacts.
+This runs all the scripts necessary to update outdated artifacts (i.e. processed data, figures, tables).
 
-**Or run steps individually:**
-- Download raw data: `make download-data`
-- Clean data: `make clean-data`
-- Validate cleaned data: `make data-validate`
-- Train/test split: `make split-data`
-- Exploratory analysis figs: `make eda`
-- Feature preprocessing (train/test): `make preprocess-data`
-- Hyperparameter search + model training: `make model-train`
-- Reuse tuned models to regenerate outputs (skip HPO): `make model-reuse`
+**Here are individual steps:**
+|Steps              |        Scripts    | Options | Examples |
+|-------------------|-------------------|--------------------------|--------------------------|
+|Download Data|scripts/download_data.py| --url<br>--write_to<br>--target-name|--url https://archive.ics.uci.edu/ml/machine-learning-databases/adult/adult.data --write_to data/raw --target-name adult.csv|
+|Clean data|scripts/clean_data.py| --input-path<br>--output-path|--input-path data/raw/adult.csv --output-path data/processed/clean_adult.csv|
+|EDA|scripts/eda.py|--input_dir<br>--out_dir|--input_dir="data/processed/clean_adult.csv" --out_dir="artifacts/figures/"|
+|Split Data|scripts/split_data.py|--input_dir<br>--out_dir|--input_dir="data/processed/clean_adult.csv" --out_dir="data/processed/"|
+|Feature preprocessing (train/test)|scripts/preprocess_data.py|--input_dir<br>--out_dir|--input_dir="data/processed/train.csv" --out_dir="data/processed/"|
+|Modeling|scripts/modeling.py|--data-dir<br>--artifacts-dir<br>--cv-folds<br>--top-n<br>--log-reg-iter<br>--svm-iter|--data-dir data --artifacts-dir artifacts --cv-folds 5 --top-n 10 --log-reg-iter 50 --svm-iter 30|
 
 What each step produces (paths):
 - Raw data: `data/raw/` (downloaded from UCI)
