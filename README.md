@@ -1,100 +1,367 @@
 # Adult Income Prediction
 
-This project explores the Adult Income dataset to understand how demographic and work-related factors relate to earning more or less than \$50,000 per year. It includes a reproducible pipeline for data prep, modeling, and a Quarto report.
+This project explores the Adult Income dataset to understand how demographic and work-related factors relate to earning more or less than **$50,000 per year**. It provides a fully reproducible **Make + Docker + Quarto** workflow for data preparation, validation, exploratory data analysis (EDA), modeling, and report rendering.
+
+Website: <https://rnanfuka.github.io/AdultIncomePrediction/>
 
 ## Contributors
-- Chun-Mien Liu
-- Rebecca Rosette Nanfuka
-- Roganci Fontelera
-- Yonas Gebre Marie
+- Chun-Mien Liu  
+- Rebecca Rosette Nanfuka  
+- Roganci Fontelera  
+- Yonas Gebre Marie  
+
+---
+## Project Structure (high-level)
+
+```text
+.
+├── data/
+│   ├── raw/                 # original Adult dataset (downloaded)
+│   └── processed/           # cleaned, split, and preprocessed datasets
+│
+├── artifacts/
+│   ├── figures/             # EDA and model evaluation plots
+│   ├── tables/              # metrics, coefficients, CV summaries
+│   └── models/              # trained model artifacts (e.g., pickles)
+│
+├── src/                     # reusable pipeline code (cleaning, EDA, modeling)
+│
+├── test/                    # data and pipeline validation tests
+│
+├── reports/
+│   └── income-prediction.qmd  # Quarto report source
+│
+├── docs/
+│   └── index.html           # rendered Quarto report (final output)
+│
+├── _quarto.yml              # Quarto project configuration
+├── environment.yml          # Conda environment & dependencies
+├── conda-lock.yml           # locked, reproducible dependency versions
+│
+├── Dockerfile               # container definition
+├── docker-compose.yml       # container orchestration
+├── Makefile                 # reproducible pipeline and report commands
+│
+├── README.md                # project overview and usage instructions
+├── CONTRIBUTING.md          # contribution guidelines
+├── CODE_OF_CONDUCT.md       # community standards
+├── LICENSE                  # project license
+└── .gitignore               # ignored files and directories
+
+
+```
+
+---
 
 ## Requirements
+
+On your machine:
 - Docker Desktop (or Docker Engine)
-- Make (optional, for shortcuts)
-- Quarto inside the container for rendering (see setup below)
+- (Optional) Make
 
-## Getting started
-1) Clone and enter the repo
+Inside the container:
+- Python environment and dependencies defined in [`environment.yml`](environment.yml)
+- Quarto (installed in the image / Conda environment)
+
+All Python dependencies are declared in **[`environment.yml`](environment.yml)** and are installed during the Docker build to ensure full reproducibility.
+
+---
+
+## Quick start
+
 ```bash
-git clone <repo-url> IncomePrediction
-cd IncomePrediction
+# 1) Clone the repository
+git clone <repo-url> AdultIncomePrediction
+cd AdultIncomePrediction
+
+
+# 3) Start the container
+make up
+# or:
+# docker-compose up -d
+
+# 4) Run the full analysis pipeline and render the report
+docker exec -it 522-milestone bash -lc 'eval "$(/opt/conda/bin/conda shell.bash hook)" && conda activate 522-milestone && make all'
 ```
 
-2) Build the image
-```bash
-make build        # or: docker compose build
-```
+After `make all` completes, the rendered report will be available at: <http://localhost:8889/>
 
-3) Start the container (JupyterLab on host port 8878)
-```bash
-docker compose up -d
-```
-- Check logs for the Jupyter token: `docker compose logs -f 522-milestone`
-- Open the printed URL but swap the port to `8878` (e.g., `http://127.0.0.1:8878/?token=...`).
-- Adjust the port in `docker-compose.yml` if you need a different host port.
+Note: If you are running it for the first time, the Docker pull and the hyperparameter tuning may take some time.
 
-4) In JupyterLab, open a Terminal (from the “+ Launcher” or File → New → Terminal) and activate the env
+Alternatively, you can try running it on your local machine without Docker.
+
 ```bash
-eval "$(/opt/conda/bin/conda shell.bash hook)"
+# 1) Create the conda environment from the lock file
+make env
+
+# 2) Activate the environment 
 conda activate 522-milestone
 
+# 3) Run the full analysis pipeline and render the report
+make all
+
+# 4) Run quarto preview to view the report locally
+quarto preview --port 8889 --host 0.0.0.0 --no-browser
 ```
 
-5) Run the pipeline from that JupyterLab terminal  
-**All steps at once:**
+After `make all` completes, the rendered report will be available at: <http://localhost:8889/>
+
+---
+
+## How to run individual steps in detail
+
+### Build the image
+
 ```bash
-make docs/index.html
+make build
 ```
-This runs all the scripts necessary to update outdated artifacts (i.e. processed data, figures, tables).
 
-**Here are individual steps:**
-|Steps              |        Scripts    | Options | Examples |
-|-------------------|-------------------|--------------------------|--------------------------|
-|Download Data|scripts/download_data.py| --url<br>--write_to<br>--target-name|--url https://archive.ics.uci.edu/ml/machine-learning-databases/adult/adult.data --write_to data/raw --target-name adult.csv|
-|Clean data|scripts/clean_data.py| --input-path<br>--output-path|--input-path data/raw/adult.csv --output-path data/processed/clean_adult.csv|
-|EDA|scripts/eda.py|--input_dir<br>--out_dir|--input_dir="data/processed/clean_adult.csv" --out_dir="artifacts/figures/"|
-|Split Data|scripts/split_data.py|--input_dir<br>--out_dir|--input_dir="data/processed/clean_adult.csv" --out_dir="data/processed/"|
-|Feature preprocessing (train/test)|scripts/preprocess_data.py|--input_dir<br>--out_dir|--input_dir="data/processed/train.csv" --out_dir="data/processed/"|
-|Modeling|scripts/modeling.py|--data-dir<br>--artifacts-dir<br>--cv-folds<br>--top-n<br>--log-reg-iter<br>--svm-iter|--data-dir data --artifacts-dir artifacts --cv-folds 5 --top-n 10 --log-reg-iter 50 --svm-iter 30|
+This builds the Docker image defined in `Dockerfile`, installing all dependencies from
+[`environment.yml`](environment.yml).
 
-What each step produces (paths):
-- Raw data: `data/raw/` (downloaded from UCI)
-- Cleaned + split CSVs: `data/processed/clean_adult.csv`, `data/processed/train.csv`, `data/processed/test.csv`
-- Validation report/logs: printed to terminal from `make data-validate` (non-blocking)
-- EDA figures: `artifacts/figures/`
-- Preprocessed train/test matrices: `data/processed/train_preprocessed.parquet`, `data/processed/test_preprocessed.parquet`
-- Models, metrics, and tuning artifacts: `artifacts/` (tables, pickles, plots)
+Rebuild only if:
 
-## Quarto report
-Quarto must be available inside the container (install with `mamba install -n 522-milestone -c conda-forge quarto` if missing).
+* `Dockerfile` changes
+* `environment.yml` changes
 
-Use the JupyterLab terminal (with the env activated) to render:
+---
+
+### Start and stop the container
+
 ```bash
-quarto render reports/income-prediction.qmd
+make up
+make stop
 ```
-Preview (inside the container):
-```bash
-quarto preview reports/income-prediction.qmd --host 0.0.0.0 --port 8889
-```
-Then open `http://localhost:8889` in your browser (add `- "8889:8889"` to `docker-compose.yml` if the port is not already mapped).
-Notes:
-- If you want Quarto baked into the image, add `quarto` to `environment.yml`, regenerate locks, and rebuild.
-- Preview uses an extra port; if you prefer not to expose it, render to HTML only.
 
-## Clean up
-- Stop services: `docker compose down`
-- Remove stopped containers: `docker compose rm`
+---
+
+### Run commands inside the container
+
+All analysis and reporting commands are intended to run **inside the container**.
+
+Open an interactive shell:
+
+```bash
+docker exec -it 522-milestone bash
+````
+
+Then activate the Conda environment:
+
+```bash
+conda activate 522-milestone
+```
+
+Run a single command directly:
+
+```bash
+docker exec -it 522-milestone bash -lc "<command>"
+```
+
+Examples:
+
+```bash
+docker exec -it 522-milestone bash -lc "make help"
+docker exec -it 522-milestone bash -lc "make analysis"
+docker exec -it 522-milestone bash -lc "make report"
+```
+
+Exit the container shell with `exit` or `Ctrl+D`.
+
+---
+
+## Make targets (what to run)
+
+### Full pipeline + report
+
+```bash
+make all
+```
+
+Equivalent to:
+
+```bash
+make data validate split preprocess eda model report
+```
+
+---
+
+### Analysis only (Python pipeline, no Quarto)
+
+```bash
+make analysis
+```
+
+This runs:
+
+1. Download and clean raw data
+2. Validate cleaned data
+3. Split data into train/test
+4. Run EDA and generate figures
+5. Preprocess features
+6. Train models with hyperparameter tuning
+7. Generate tables and plots
+
+---
+
+### Individual steps
+
+Download and clean data:
+
+```bash
+make data
+```
+
+Validate cleaned data (non-failing):
+
+```bash
+make validate
+```
+
+Split into train/test:
+
+```bash
+make split
+```
+
+Preprocess train and test data:
+
+```bash
+make preprocess
+```
+
+Run EDA:
+
+```bash
+make eda
+```
+
+Train models and generate artifacts:
+
+```bash
+make model
+```
+
+Render the Quarto report/site:
+
+```bash
+make report
+```
+
+---
+
+## Outputs
+
+### Data
+
+* Raw data: `data/raw/adult.csv`
+* Cleaned data: `data/processed/clean_adult.csv`
+* Train/test split: `data/processed/train.csv`, `data/processed/test.csv`
+* Preprocessed data:
+
+  * `data/processed/preprocessed_train.csv`
+  * `data/processed/preprocessed_test.csv`
+
+### EDA figures
+
+Saved to:
+
+```text
+artifacts/figures/
+```
+
+### Modeling artifacts
+
+Saved to:
+
+```text
+artifacts/tables/
+artifacts/figures/
+```
+
+Includes:
+
+* Cross-validation summaries
+* Model coefficients
+* Hyperparameter search results
+* Performance plots and table images
+
+### Report
+
+* Rendered output: `docs/index.html`
+
+---
+
+## Quarto notes
+
+The Quarto source file is:
+
+```text
+reports/income-prediction.qmd
+```
+
+Rendering inside the container can be done with:
+
+```bash
+quarto render
+```
+
+The report expects all analysis artifacts (EDA + modeling outputs) to exist before rendering.
+
+---
+
+## Cleaning up
+
+Remove processed data and figures (keeps directory structure):
+
+```bash
+make clean
+```
+
+Stop and remove containers:
+
+```bash
+docker-compose down
+```
+
+---
 
 ## Troubleshooting
-- Jupyter URL/port mismatch: check `docker-compose.yml` port mapping and use that host port in the URL token.
-- Conda not found in JupyterLab terminal: run `eval "$(/opt/conda/bin/conda shell.bash hook)"` before `conda activate 522-milestone`.
-- Quarto not found: install in the container env (`mamba install -n 522-milestone -c conda-forge quarto`) or rebuild with it baked in.
-- Stale artifacts: remove `data/processed/` and `artifacts/` if you need a clean run, then rerun the pipeline.
+
+**Container not found**
+
+* Ensure it is running: `docker ps`
+* Start it: `make up`
+
+**Quarto not found inside container**
+
+* Ensure Quarto is listed in [`environment.yml`](environment.yml) and rebuild the image
+
+**Report missing plots or tables**
+
+* Run the analysis first:
+
+```bash
+make analysis
+make report
+```
+
+or simply:
+
+```bash
+make all
+```
+
+---
 
 ## License
-Distributed under the MIT License (see `LICENSE`).
+
+Distributed under the MIT License (see [LICENSE](LICENSE)).
+
+---
 
 ## References
-- UCI Machine Learning Repository. (1996). Adult Dataset. https://archive.ics.uci.edu/dataset/2/adult
-- Kohavi, R. (1996). Scaling Up the Accuracy of Naive-Bayes Classifiers: A Decision-Tree Hybrid. Proceedings of the Second International Conference on Knowledge Discovery and Data Mining (KDD).
-- U.S. Census Bureau. Current Population Survey (CPS). https://www.census.gov/programs-surveys/cps.html
+
+* UCI Machine Learning Repository. (1996). Adult Dataset. [https://archive.ics.uci.edu/dataset/2/adult](https://archive.ics.uci.edu/dataset/2/adult)
+* Kohavi, R. (1996). Scaling Up the Accuracy of Naive-Bayes Classifiers: A Decision-Tree Hybrid. KDD.
+* U.S. Census Bureau. Current Population Survey (CPS). [https://www.census.gov/programs-surveys/cps.html](https://www.census.gov/programs-surveys/cps.html)
+

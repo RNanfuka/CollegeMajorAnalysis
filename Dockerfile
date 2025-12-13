@@ -2,31 +2,48 @@
 FROM condaforge/miniforge3:latest
 
 # copy the lockfile into the container
-COPY conda-lock.yml conda-lock.yml
+COPY conda-linux-64.lock conda-linux-64.lock
 
 # setup conda-lock and install packages from lockfile
 RUN conda install -n base -c conda-forge conda-lock jupyterlab nb_conda_kernels -y
-RUN conda-lock install -n 522-milestone conda-lock.yml
+RUN conda run -n base conda-lock install -n 522-milestone conda-linux-64.lock
 
 # Install system utilities (Make, Curl, etc.)
-RUN apt-get update && apt-get install -y make curl
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends make curl \
+    && rm -rf /var/lib/apt/lists/*
 
-# 2. Download and install the specific ARM64 .deb file
-# (We use version 1.8.26 here, but you can update the URL to a newer version later)
-RUN curl -LO https://github.com/quarto-dev/quarto-cli/releases/download/v1.8.26/quarto-1.8.26-linux-arm64.deb \
-    && dpkg -i quarto-1.8.26-linux-arm64.deb \
-    && rm quarto-1.8.26-linux-arm64.deb
-
-# expose JupyterLab port
-EXPOSE 8888
-
+# Expose ports
+EXPOSE 8888 
+EXPOSE 8889
 # sets the default working directory
 # this is also specified in the compose file
 WORKDIR /workspace
 
-# Append the hook to .bashrc so every new Jupyter terminal gets it automatically
+# Ensure conda is initialized in terminals
 RUN echo 'eval "$(/opt/conda/bin/conda shell.bash hook)"' >> ~/.bashrc
 
-# run JupyterLab on container start
-# uses the jupyterlab from the install environment
-CMD ["conda", "run", "--no-capture-output", "-n", "522-milestone", "jupyter", "lab", "--ip=0.0.0.0", "--port=8888", "--no-browser", "--allow-root", "--IdentityProvider.token=''", "--ServerApp.password=''"]
+# Environment variable to control which service runs
+# Options: "jupyter" OR "quarto"
+ENV SERVICE=jupyter
+
+RUN conda run -n 522-milestone quarto --version
+
+# Script that chooses which service to run
+# (Installed into the container as /entrypoint.sh)
+RUN printf '%s\n' \
+'#!/bin/bash' \
+'set -e' \
+'eval "$(/opt/conda/bin/conda shell.bash hook)"' \
+'if [ "$SERVICE" = "quarto" ]; then' \
+'  echo "🚀 Starting Quarto preview on port 8889..."' \
+'  conda run --no-capture-output -n 522-milestone quarto preview --port 8889 --host 0.0.0.0 --no-browser' \
+'else' \
+'  echo "🚀 Starting JupyterLab on port 8888..."' \
+'  conda run --no-capture-output -n 522-milestone jupyter lab --ip=0.0.0.0 --port=8888 --no-browser --allow-root --IdentityProvider.token= --ServerApp.password=' \
+'fi' \
+> /entrypoint.sh \
+    && chmod +x /entrypoint.sh
+
+# Use the entrypoint
+ENTRYPOINT ["/entrypoint.sh"]
